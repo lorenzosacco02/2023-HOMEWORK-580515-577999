@@ -35,6 +35,7 @@ public class Labirinto {
 	public Stanza aulaN10 = new Stanza("Aula N10");
 	public Stanza laboratorio = new Stanza("Laboratorio Campus");
 	public Stanza biblioteca = new Stanza("Biblioteca");
+	public Stanza alle_scale_piace_cambiare = new StanzaMagica("2 oggetti per la magia",2);
 	
 	/**
 	 * crea un labirinto con un'entrata un'uscita e un percorso
@@ -70,6 +71,8 @@ public class Labirinto {
 		aulaN10.impostaStanzaAdiacente("est", aulaN11);
 		aulaN10.impostaStanzaAdiacente("ovest", laboratorio);
 		laboratorio.impostaStanzaAdiacente("est", atrio);
+		laboratorio.impostaStanzaAdiacente("sud", alle_scale_piace_cambiare);
+		alle_scale_piace_cambiare.impostaStanzaAdiacente("nord", laboratorio);
 		laboratorio.impostaStanzaAdiacente("ovest", aulaN11);
 		biblioteca.impostaStanzaAdiacente("sud", atrio);
 		this.inserisci_attrezzi(atrio, lanterna);

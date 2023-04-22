@@ -88,4 +88,8 @@ public class Partita {
 	public Giocatore getPlayer(){
 		return this.Player;
 	}
+	
+	public void setPlayer(Giocatore Player) {
+		this.Player=Player;
+	}
 }

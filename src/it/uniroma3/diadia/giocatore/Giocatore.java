@@ -30,27 +30,37 @@ public class Giocatore {
 	}
 
 	public String PrendiAttrezzo(String attrezzo, Stanza StanzaAttuale) {
-		String messaggioDaStampare = "Il tuo attrezzo non esiste";
+		StringBuilder messaggioDaStampare = new StringBuilder("");
 		Attrezzo prendere;
-		if(StanzaAttuale!=null) {
-		prendere = StanzaAttuale.getAttrezzo(attrezzo);
-		if(prendere!=null) {
-			if((BorsaDelGiocatore.getPeso()+prendere.getPeso())<=10) {
-				BorsaDelGiocatore.addAttrezzo(prendere);
-				StanzaAttuale.removeAttrezzo(prendere);
-				messaggioDaStampare="Ho preso " + prendere.toString()+"! Lo troverai nella tua Borsa: "+(BorsaDelGiocatore.getPeso())+"kg/"+BorsaDelGiocatore.getPesoMax()+"kg\n";
+		if(attrezzo==null){
+			messaggioDaStampare.append("Che attrezzo vuoi prendere?");
+		}else{
+			if(StanzaAttuale!=null) {
+				prendere = StanzaAttuale.getAttrezzo(attrezzo);
+				if(prendere!=null) {
+					if((BorsaDelGiocatore.getPeso()+prendere.getPeso())<=10) {
+						BorsaDelGiocatore.addAttrezzo(prendere);
+						StanzaAttuale.removeAttrezzo(prendere);
+						messaggioDaStampare.append("Ho preso " + prendere.toString()+"! Lo troverai nella tua Borsa: "+(BorsaDelGiocatore.getPeso())+"kg/"+BorsaDelGiocatore.getPesoMax()+"kg\n");
+					}
+					else
+						messaggioDaStampare.append("La tua borsa è troppo pesante prova a lasciare qualche attrezzo a terra");
+				}else{
+					messaggioDaStampare.append("Il tuo attrezzo non esiste");
+				}
 			}
 			else
-				messaggioDaStampare="La tua borsa è troppo pesante prova a lasciare qualche attrezzo a terra";
+				messaggioDaStampare.append("La stanza non esiste");
 		}
-		}
-		return messaggioDaStampare;
+		return messaggioDaStampare.toString();
 	}
-		
+
 
 	public String RemoveAttrezzo(String attrezzo, Stanza StanzaAttuale) {
-		if(attrezzo == null || StanzaAttuale== null) 
-			return "Oggetto o Stanza innesistente";
+		if(attrezzo == null) 
+			return "Che attrezzo vuoi posare?";
+		if(StanzaAttuale== null)
+			return "Stanza innesistente";
 		if(StanzaAttuale.getNumeroAttrezzi()==10)
 			return "C'è già troppo disordine in questa stanza!\nNon vorrei crearne altro";
 		if(this.BorsaDelGiocatore.getAttrezzo(attrezzo)==null){

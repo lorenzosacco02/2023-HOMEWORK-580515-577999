@@ -1,5 +1,5 @@
 package it.uniroma3.diadia;
-
+import it.uniroma3.diadia.comandi.*;
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
  * Per giocare crea un'istanza di questa classe e invoca il metodo gioca
@@ -13,8 +13,9 @@ package it.uniroma3.diadia;
 public class DiaDia {
 
 	public static void main(String[] argc) {
-		DiaDia gioco = new DiaDia();
-		gioco.gioca(gioco.console);
+		IO io = new IOConsole();
+		DiaDia gioco = new DiaDia(io);
+		gioco.gioca();
 	}
 
 	static final private String MESSAGGIO_BENVENUTO = ""
@@ -30,13 +31,15 @@ public class DiaDia {
 
 	private Partita partita;
 	private IOConsole console;
+	private FabbricaDiComandiFisarmonica Fabbrica;
 
 	/**
 	 * Inizializza una nuova Partita e una Console
 	 */
-	public DiaDia() {
+	public DiaDia(IO io) {
 		this.partita = new Partita();
-		this.console = new IOConsole();
+		this.console = (IOConsole) io;
+		this.Fabbrica= new FabbricaDiComandiFisarmonica();
 	}
 
 	/**
@@ -45,17 +48,19 @@ public class DiaDia {
 	 * Finisce la partita dal momento in cui si vince o si desidera smettere di giocare.
 	 * @param console
 	 */
-	public void gioca(IOConsole console) {
+	public void gioca() {
 		String istruzione;
-		String[] istruzioni;
-		console.mostraMessaggio(MESSAGGIO_BENVENUTO);
+		this.console.mostraMessaggio(MESSAGGIO_BENVENUTO);
+		Comando comandoCostruito;
 		do {
-			istruzione = console.leggiRiga();
-			istruzione = istruzione.toLowerCase();
-			istruzioni = istruzione.split("\\W");
-		} while (!processaIstruzione(istruzioni) && !this.partita.isFinita());
-		Comando comandoFine = new Comando();
-		this.console.mostraMessaggio(comandoFine.fine());
+			istruzione = this.console.leggiRiga();
+			comandoCostruito=Fabbrica.costruisciComando(istruzione);
+		} 
+		while (!processaIstruzione(comandoCostruito, this.console) && !this.partita.isFinita());
+		if(this.partita.getPlayer().getCfu()==0) {
+			this.console.mostraMessaggio("\nOh no hai perso mi dispiace,");
+		}
+		this.console.mostraMessaggio("Grazie di aver giocato!");
 	}
 
 	/**
@@ -65,52 +70,49 @@ public class DiaDia {
 	 * @param istruzione da eseguire
 	 * @return true solo se partita è vinta o finita, false altrimenti
 	 */
-	private boolean processaIstruzione(String[] istruzione) {
-		Comando comandoDaEseguire = new Comando();
-		switch (istruzione[0]) {
-		case "fine":
+	private boolean processaIstruzione (Comando comandoCostruito, IOConsole console) {
+		String stampa = comandoCostruito.esegui(this.partita).toString();
+		String Parametro;
+		
+		switch(stampa.toString()){
+		case "Che attrezzo vuoi posare?":
+			do{
+				console.mostraMessaggio("Che oggetto vuoi posare?");
+				Parametro = console.leggiRiga();
+			}
+			while(Parametro.equals(""));
+			comandoCostruito.setParametro(Parametro);
+			stampa = comandoCostruito.esegui(this.partita).toString();
+			break;
+			
+		case "Che attrezzo vuoi prendere?":
+			do{
+				console.mostraMessaggio("Che oggetto vuoi prendere?");
+				Parametro = console.leggiRiga();
+			}
+			while(Parametro.equals(""));
+			comandoCostruito.setParametro(Parametro);
+			stampa = comandoCostruito.esegui(this.partita).toString();
+			break;
+			
+		case "Dove vuoi andare?\n":
+			do{
+				console.mostraMessaggio("Dove vuoi andare?");
+				Parametro = console.leggiRiga();
+			}
+			while(Parametro.equals(""));
+			comandoCostruito.setParametro(Parametro);
+			stampa = comandoCostruito.esegui(this.partita).toString();
+			break;
+			
+		case "Grazie di aver giocato!":
 			return true;
-		case "vai":
-			if (istruzione.length > 1) {
-				this.console.mostraMessaggio(comandoDaEseguire.vai(istruzione[1], this.partita));
-			} else {
-				this.console.mostraMessaggio("Dove vuoi andare?");
-				this.console.mostraMessaggio(comandoDaEseguire.vai(this.console.leggiRiga(), this.partita));
-			}
-			break;
-		case "aiuto":
-			if (istruzione.length > 1)
-				this.console.mostraMessaggio(comandoDaEseguire.aiuto(istruzione[1]));
-			else
-				this.console.mostraMessaggio(comandoDaEseguire.aiuto(""));
-			break;
-		case "prendi":
-			if (istruzione.length > 1)
-				this.console.mostraMessaggio(comandoDaEseguire.prendi(istruzione[1], this.partita));
-			else {
-				this.console.mostraMessaggio("Cosa vuoi prendere?");
-				this.console.mostraMessaggio(comandoDaEseguire.prendi(this.console.leggiRiga(), this.partita));
-			}
-			break;
-		case "posa":
-			if (istruzione.length > 1)
-				this.console.mostraMessaggio(comandoDaEseguire.rimuovi(istruzione[1], this.partita));
-			else {
-				this.console.mostraMessaggio("Cosa vuoi lasciare?");
-				this.console.mostraMessaggio(comandoDaEseguire.rimuovi(this.console.leggiRiga(), this.partita));
-			}
-			break;
-		case "borsa":
-			this.console.mostraMessaggio(this.partita.getPlayer().getBorsa().toString());
-			break;
-		default:
-			this.console.mostraMessaggio("Comando sconosciuto");
-			break;
 		}
+		this.console.mostraMessaggio(stampa);
 		if (this.partita.vinta()) {
 			this.console.mostraMessaggio("WOW HAI VINTO!");
 			return true;
-		} else
-			return false;
+		}
+		return false;
 	}
 }
