@@ -68,7 +68,7 @@ class GiocatoreTest {
 	}
 	@Test
 	void testPrendiAttrezzoStanzaNull() {
-		assertEquals("Il tuo attrezzo non esiste", GiocatoreConBorsaNonVuota.PrendiAttrezzo("", null));
+		assertEquals("La stanza non esiste", GiocatoreConBorsaNonVuota.PrendiAttrezzo("", null));
 	}
 
 	//Test Metodi Con CFU
