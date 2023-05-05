@@ -7,8 +7,8 @@ import it.uniroma3.diadia.attrezzi.*;
  * uscita i collegamenti fra le stanze e gli attrezzi al loro interno.
  *
  * @author 580515, 577999
- * @see Stanza,Attrezzo
- * @version 1.0
+ * @see Stanza,StanzaBuia,StanzaBloccata,Attrezzo
+ * @version 2.0
  */
 
 public class Labirinto {

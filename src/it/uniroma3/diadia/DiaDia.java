@@ -7,7 +7,7 @@ import it.uniroma3.diadia.comandi.*;
  * Questa e' la classe principale crea e istanzia tutte le altre
  *
  * @author 580515, 577999 (da un'idea di Michael Kolling and David J. Barnes)
- * @version 1.0
+ * @version 2.0
  */
 
 public class DiaDia {
@@ -44,9 +44,9 @@ public class DiaDia {
 
 	/**
 	 * Permette di interagire con l'utente prendendo messagggi in input.
-	 * riceve come parametro la console per interagire con l'utente e invoca il metodo processaIstruzione
+	 * inizializza una Fabbrica di comandi grazie alla quale costruisce il comando
+	 * invoca il metodo processaIstruzione
 	 * Finisce la partita dal momento in cui si vince o si desidera smettere di giocare.
-	 * @param console
 	 */
 	public void gioca() {
 		String istruzione;
@@ -65,15 +65,15 @@ public class DiaDia {
 
 	/**
 	 * Metodo che gestisce lo svolgimento del gioco 
-	 * processa le istruzioni che riceve in imput invocando i metodo necessari
+	 * processa le istruzioni che riceve in input invocando i metodo necessari
 	 * gestisce anche interazione con utente stampando messaggi.
-	 * @param istruzione da eseguire
+	 * @param istruzione da eseguire, console di gioco
 	 * @return true solo se partita è vinta o finita, false altrimenti
 	 */
 	private boolean processaIstruzione (Comando comandoCostruito, IOConsole console) {
 		String stampa = comandoCostruito.esegui(this.partita).toString();
 		String Parametro;
-		
+
 		switch(stampa.toString()){
 		case "Che attrezzo vuoi posare?":
 			do{
@@ -84,7 +84,7 @@ public class DiaDia {
 			comandoCostruito.setParametro(Parametro);
 			stampa = comandoCostruito.esegui(this.partita).toString();
 			break;
-			
+
 		case "Che attrezzo vuoi prendere?":
 			do{
 				console.mostraMessaggio("Che oggetto vuoi prendere?");
@@ -94,7 +94,7 @@ public class DiaDia {
 			comandoCostruito.setParametro(Parametro);
 			stampa = comandoCostruito.esegui(this.partita).toString();
 			break;
-			
+
 		case "Dove vuoi andare?\n":
 			do{
 				console.mostraMessaggio("Dove vuoi andare?");
@@ -104,7 +104,7 @@ public class DiaDia {
 			comandoCostruito.setParametro(Parametro);
 			stampa = comandoCostruito.esegui(this.partita).toString();
 			break;
-			
+
 		case "Grazie di aver giocato!":
 			return true;
 		}

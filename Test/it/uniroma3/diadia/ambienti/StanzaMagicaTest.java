@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
+
 class StanzaMagicaTest {
 
 	private StanzaMagica StanzaSenzaNomeVuota;

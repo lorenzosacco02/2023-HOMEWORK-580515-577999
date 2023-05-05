@@ -47,13 +47,13 @@ class StanzaTest {
 
 	@Test
 	void testGetArrayDiAttrezziNomeStanzaSenzaNomeVuota() {
-		for(int i=0;i<10;i++)
-			assertEquals(arrayVuoto[i].getNome(),StanzaSenzaNomeVuota.getArrayDiAttrezzi()[i].getNome());
+		for(int i=0;i<StanzaSenzaNomeVuota.getListaDiAttrezzi().size();i++)
+			assertEquals(arrayVuoto[i].getNome(),StanzaSenzaNomeVuota.getListaDiAttrezzi().get(i).getNome());
 	}
 	@Test
 	void testGetArrayDiAttrezziPesoStanzaSenzaNomeVuota() {
-		for(int i=0;i<10;i++)
-			assertEquals(arrayVuoto[i].getPeso(),StanzaSenzaNomeVuota.getArrayDiAttrezzi()[i].getPeso());
+		for(int i=0;i<StanzaSenzaNomeVuota.getListaDiAttrezzi().size();i++)
+			assertEquals(arrayVuoto[i].getPeso(),StanzaSenzaNomeVuota.getListaDiAttrezzi().get(i).getPeso());
 	}
 
 	//Test del mettodo Get Stanza Adiacente
@@ -84,10 +84,6 @@ class StanzaTest {
 	@Test
 	void testAddAttrezzoStanzaVuota(){
 		assertTrue(StanzaConNome.addAttrezzo(attrezzi[0]));
-	}
-	@Test
-	void testAddAttrezzoStanzaPiena(){
-		assertFalse(StanzaPiena.addAttrezzo(attrezzi[4]));
 	}
 	@Test
 	void testAddAttrezzoStanzaPienVuotaConAttrezzoNull(){

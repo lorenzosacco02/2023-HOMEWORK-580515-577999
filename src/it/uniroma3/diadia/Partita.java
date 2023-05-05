@@ -11,7 +11,7 @@ import it.uniroma3.diadia.ambienti.*;
  *
  * @author  580515, 577999
  * @see Stanza,Giocatore 
- * @version 1.0
+ * @version 2.0
  */
 
 public class Partita {
