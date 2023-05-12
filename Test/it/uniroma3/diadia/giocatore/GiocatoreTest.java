@@ -14,7 +14,7 @@ class GiocatoreTest {
 	private Attrezzo attrezzoDiProva;
 	private Stanza StanzaPienaConRipetizione;
 	private Stanza StanzaConRipetizione;
-	private Attrezzo[] attrezzi={new Attrezzo(),new Attrezzo("",5),new Attrezzo("Attrezzo",0),new Attrezzo("Attrezzo",5),new Attrezzo("Banana",2),new Attrezzo("osso",6),new Attrezzo("spada",1),new Attrezzo("scudo",1),new Attrezzo("cassa",2),new Attrezzo("sasso",1)};
+	private Attrezzo[] attrezzi={new Attrezzo(),new Attrezzo("",5),new Attrezzo("Attrezzo",5),new Attrezzo("Attrezzo",5),new Attrezzo("Banana",2),new Attrezzo("osso",6),new Attrezzo("spada",1),new Attrezzo("scudo",1),new Attrezzo("cassa",2),new Attrezzo("sasso",1)};
 	private Borsa borsaNonVuota;
 	private Borsa borsaVuota;
 	private Giocatore GiocatoreConBorsaNonVuota;
@@ -94,11 +94,11 @@ class GiocatoreTest {
 	//Test del metodo removeAttrezzo
 	@Test
 	void testRemoveAttrezzoInesistente(){
-		assertEquals("Oggetto o Stanza innesistente",this.GiocatoreConBorsaNonVuota.RemoveAttrezzo(null, StanzaConRipetizione));
+		assertEquals("Che attrezzo vuoi posare?",this.GiocatoreConBorsaNonVuota.RemoveAttrezzo(null, StanzaConRipetizione));
 	}
 	@Test
 	void testRemoveAttrezzoConStanzaInesistente() {
-		assertEquals("Oggetto o Stanza innesistente",this.GiocatoreConBorsaNonVuota.RemoveAttrezzo(attrezzi[3].getNome(), null));
+		assertEquals("Stanza innesistente",this.GiocatoreConBorsaNonVuota.RemoveAttrezzo(attrezzi[3].getNome(), null));
 	}
 	@Test
 	void testRemoveAttrezzoConStanzaPiena(){

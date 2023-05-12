@@ -2,19 +2,38 @@ package it.uniroma3.diadia.giocatore;
 import it.uniroma3.diadia.attrezzi.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BorsaTest {
+	private SortedSet<Attrezzo> SetOrdinatoPerNome;
+	private Set<Attrezzo> SetDaOrdinare;
 	private Borsa BorsaNonVuota;
 	private Borsa BorsaPiena;
 	private Borsa BorsaVuota;
 	private Attrezzo AttrezzoTest;
 	private Attrezzo AttrezzoPesante;
-	private Attrezzo[] attrezzi={new Attrezzo(),new Attrezzo(" ",5),new Attrezzo("Attrezzo",0),new Attrezzo("Attrezzo",5),new Attrezzo("Banana",200)};
+	private Attrezzo[] attrezzi={new Attrezzo(),new Attrezzo("Cassa",5),new Attrezzo("Attrezzo",0),new Attrezzo("Attrezzo",5),new Attrezzo("Banana",200)};
 
 	@BeforeEach
 	void setup() {
+		SetOrdinatoPerNome = new TreeSet<Attrezzo>();
+		SetOrdinatoPerNome.add(attrezzi[0]);
+		SetOrdinatoPerNome.add(attrezzi[1]);
+		SetOrdinatoPerNome.add(attrezzi[2]);
+		SetDaOrdinare = new HashSet<Attrezzo>();
+		for(int i=0;i<10;i++) {
+			if(i<5) {
+				SetDaOrdinare.add(attrezzi[i]);
+			}
+			else {
+				SetDaOrdinare.add(attrezzi[i-5]);
+			}
+		}
 		BorsaNonVuota = new Borsa();
 		BorsaVuota = new Borsa();
 		AttrezzoTest= new Attrezzo("Attrezzone",4);
@@ -147,6 +166,27 @@ class BorsaTest {
 	}
 	@Test
 	void testToStringBorsaPiena() {
-		assertEquals("Contenuto borsa (10kg/10kg):  (0kg)   (5kg) Attrezzo (0kg) Attrezzo (5kg)  (0kg) Attrezzo (0kg) ",BorsaPiena.toString());
+		assertEquals("Contenuto borsa (10kg/10kg):  (0kg) Cassa (5kg) Attrezzo (0kg) Attrezzo (5kg)  (0kg) Attrezzo (0kg) ",BorsaPiena.toString());
+	}
+
+	//Test dei metodi di ordinamento
+	@Test
+	void testGetContenutoOrdinatoPerNome() {
+		assertEquals(SetOrdinatoPerNome,BorsaPiena.getContenutoOrdinatoPerNome());
+	}
+
+	@Test
+	void testgetSortedSetOrdinatoPerPeso() {
+		assertEquals("[ (0kg), Attrezzo (0kg), Attrezzo (5kg), Cassa (5kg)]",BorsaPiena.getSortedSetOrdinatoPerPeso().toString());
+	}
+
+	@Test
+	void testgetContenutoOrdinatoPerPeso() {
+		assertEquals("[ (0kg),  (0kg), Attrezzo (0kg), Attrezzo (0kg), Attrezzo (5kg), Cassa (5kg)]",BorsaPiena.getContenutoOrdinatoPerPeso().toString());
+	}
+
+	@Test
+	void testgetContenutoRaggruppatoPerPeso() {
+		assertEquals("{0=[ (0kg), Attrezzo (0kg)], 5=[Attrezzo (5kg), Cassa (5kg)]}",BorsaPiena.getContenutoRaggruppatoPerPeso().toString());
 	}
 }

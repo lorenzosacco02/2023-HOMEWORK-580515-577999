@@ -3,10 +3,13 @@ package it.uniroma3.diadia.comandi;
 import it.uniroma3.diadia.Partita;
 
 public class ComandoNonValido implements Comando{
-
+	
+	public ComandoNonValido(){
+		
+	}
+	
 	@Override
 	public void setParametro(String Parametro) {
-
 	}
 	
 	@Override

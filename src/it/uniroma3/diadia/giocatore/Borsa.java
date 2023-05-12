@@ -1,10 +1,18 @@
 package it.uniroma3.diadia.giocatore;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.attrezzi.ComparatorPerPeso;
 
 /**
  * Una semplice classe che modella una Borsa.
@@ -64,6 +72,59 @@ public class Borsa{
 	 */
 	public int getPesoMax() {
 		return pesoMax;
+	}
+	
+	/**
+	 * restituisce l'insieme degli attrezzi nella borsa ordinati per nome
+	 * @return Set di attrezzi ordinati per nome
+	 */
+	public SortedSet<Attrezzo> getContenutoOrdinatoPerNome(){
+		SortedSet<Attrezzo> attrezziPerNome = new TreeSet<Attrezzo>(attrezzi);
+		return attrezziPerNome;
+	}
+	
+	/**
+	 * restituisce l'insieme gli attrezzi nella borsa
+	 * ordinati per peso e quindi, a parità di peso, per nome
+	 * @return Set di attrezzi ordinarti per peso
+	 */
+	public SortedSet<Attrezzo> getSortedSetOrdinatoPerPeso(){
+		Comparator<Attrezzo> comp = new ComparatorPerPeso();
+		SortedSet<Attrezzo> attrezziSetPeso = new TreeSet<Attrezzo>(comp);
+		attrezziSetPeso.addAll(attrezzi);
+		return attrezziSetPeso;
+	}
+	
+	/**
+	 * restituisce una mappa che associa un intero (rappresentante un
+	 * peso) con l’insieme degli attrezzi di tale peso
+	 * @return Map con interi per chiavi e set di attrezzi come valori associati
+	 */
+	public Map<Integer,Set<Attrezzo>> getContenutoRaggruppatoPerPeso(){
+		Map<Integer,Set<Attrezzo>> MapDiAttrezzi = new HashMap<>();
+		ListIterator<Attrezzo> i = attrezzi.listIterator();
+		while(i.hasNext()) {
+			Attrezzo temp = i.next();
+			if(!MapDiAttrezzi.containsKey(temp.getPeso())) {
+				Set<Attrezzo> attrezziSet = new TreeSet<Attrezzo>();
+				attrezziSet.add(temp);
+				MapDiAttrezzi.put(temp.getPeso(), attrezziSet);
+			}else{
+				MapDiAttrezzi.get(temp.getPeso()).add(temp);
+			}
+		}
+		return MapDiAttrezzi;
+	}
+
+	/**
+	 * restituisce la lista degli attrezzi nella borsa ordinati per peso e
+	 * quindi, a parità di peso, per nome
+	 * @return List di attrezzi presenti nella borsa ordinati per peso
+	 */
+	public List<Attrezzo> getContenutoOrdinatoPerPeso(){
+		List<Attrezzo> attrezziOrdinati = new LinkedList<Attrezzo>(attrezzi);
+		Collections.sort(attrezziOrdinati, new ComparatorPerPeso());
+		return attrezziOrdinati;
 	}
 
 	/**

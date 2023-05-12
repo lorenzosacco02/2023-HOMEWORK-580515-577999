@@ -11,7 +11,7 @@ package it.uniroma3.diadia.attrezzi;
  * @version 1.0
  */
 
-public class Attrezzo {
+public class Attrezzo implements Comparable<Attrezzo>{
 
 	private String nome;
 	private int peso;
@@ -50,7 +50,7 @@ public class Attrezzo {
 	public int getPeso() {
 		return this.peso;
 	}
-	
+
 	/**
 	 * Permette di impostare il peso dell'attrezzo
 	 * @param intero con il peso desiderato
@@ -58,7 +58,7 @@ public class Attrezzo {
 	public void setPeso(int peso) {
 		this.peso = peso;
 	}
-	
+
 	/**
 	 * Permette di impostare il nome dell'attrezzo
 	 * @param Stringa con il nome desiderato
@@ -73,5 +73,19 @@ public class Attrezzo {
 	public String toString() {
 		return this.getNome()+" ("+this.getPeso()+"kg)";
 	}
-
+	
+	@Override 
+	public boolean equals(Object o){
+		Attrezzo that=(Attrezzo)o;
+		return this.getNome().equals(that.getNome());
+	}
+	@Override
+	public int hashCode() {
+		return this.peso+this.getNome().hashCode();
+	}
+	
+	@Override
+	public int compareTo(Attrezzo o) {
+		return this.getNome().compareTo(o.getNome());
+	}
 }

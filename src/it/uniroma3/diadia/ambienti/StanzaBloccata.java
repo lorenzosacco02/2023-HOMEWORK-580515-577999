@@ -1,4 +1,10 @@
 package it.uniroma3.diadia.ambienti;
+import it.uniroma3.diadia.attrezzi.*;
+
+import java.util.Arrays;
+import java.util.ListIterator;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Una stanza in un gioco di ruolo.
@@ -12,11 +18,10 @@ package it.uniroma3.diadia.ambienti;
  */
 
 public class StanzaBloccata extends Stanza{
-	private String[] direzioniBloccate;
-	private String[] oggettiSbloccanti;
-	private int numeroDirezioniBloccate;
+	private List<String> direzioniBloccate;
+	private List<String> oggettiSbloccanti;
 	static final private int NUMERO_MASSIMO_DIREZIONI_BLOCCATE = 3;
-	final static private String[] OGGETTI_DEFAULT={"piedediporco","passepartout",""};
+	final static private String[] OGGETTI_DEFAULT = {"piedediporco","passepartout","cacciavite"};
 
 	public StanzaBloccata(String nome) {
 		this(nome, OGGETTI_DEFAULT);
@@ -24,20 +29,22 @@ public class StanzaBloccata extends Stanza{
 
 	public StanzaBloccata(String nome, String... oggetti) {
 		super(nome);
-		this.oggettiSbloccanti=oggetti;
-		this.numeroDirezioniBloccate=0;
-		this.oggettiSbloccanti[oggettiSbloccanti.length-1]="chiave della stanza " + this.getNome();
-		this.direzioniBloccate= new String[NUMERO_MASSIMO_DIREZIONI_BLOCCATE];
+		this.oggettiSbloccanti= new LinkedList<String>(Arrays.asList(oggetti));
+		this.direzioniBloccate= new LinkedList<String>();
 	}
 
 	/**
 	 * Permette di impostare la direzione bloccata nella stanza
 	 * @param Stringa con la direzione da bloccare
 	 */
+	public void impostaDirezioneBloccata(String[] direzione){
+		for(String i :direzione){
+			impostaDirezioneBloccata(i);
+		}
+	}
 	public void impostaDirezioneBloccata(String direzione) {
-			if (this.numeroDirezioniBloccate<this.direzioniBloccate.length) {
-				this.direzioniBloccate[this.numeroDirezioniBloccate] = direzione;
-				this.numeroDirezioniBloccate++;
+		if (this.direzioniBloccate.size()<NUMERO_MASSIMO_DIREZIONI_BLOCCATE) {
+			this.direzioniBloccate.add(direzione);
 		}
 	}
 
@@ -47,21 +54,11 @@ public class StanzaBloccata extends Stanza{
 	 */
 
 	@Override
-	public String[] getDirezioni() {
+	public List<String> getDirezioni() {
 		sblocca_stanza();
-		if(numeroDirezioniBloccate!=0) {
-			String[] direzioniNuove = super.getDirezioni();
-			int i = 0;
-			for(int j=0; j<direzioniNuove.length-1; j++) {
-				if(direzioniNuove[i].equals(direzioniBloccate[j])==true){
-					direzioniNuove[i]=null;
-					i++;
-				}
-			}
-			return direzioniNuove;
-		}
-		else
-			return super.getDirezioni();
+		List<String> Direzioni=super.getDirezioni();
+		Direzioni.removeAll(direzioniBloccate);
+		return Direzioni;
 	}
 
 
@@ -71,13 +68,18 @@ public class StanzaBloccata extends Stanza{
 	 * in caso ci sia sblocca tutte le direzioni e la stanza si comporta normalmente
 	 */
 	private void sblocca_stanza(){
-		for(int i=0; i<oggettiSbloccanti.length; i++) {
-			if(super.hasAttrezzo(oggettiSbloccanti[i])==true)
-				this.numeroDirezioniBloccate=0;
+		ListIterator<Attrezzo> i = super.getListaDiAttrezzi().listIterator();
+		ListIterator<String> j = this.oggettiSbloccanti.listIterator();
+		while(i.hasNext()) {
+			while(j.hasNext()) {
+				if(i.next().toString().equals(j.next())) {
+					this.direzioniBloccate.removeAll(direzioniBloccate);
+				}
+			}	
 		}
 	}
 
-	public String[] getDirezioniBloccate() {
+	public List<String> getDirezioniBloccate() {
 		return this.direzioniBloccate;
 	}
 }

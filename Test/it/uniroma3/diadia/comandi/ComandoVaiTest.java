@@ -27,7 +27,7 @@ class ComandoVaiTest {
 	@Test
 	void testVaiNull() {
 		Vai.setParametro(null);
-		assertEquals("Dove vuoi andare ?\n"+partita.getStanzaCorrente().getDescrizione(),Vai.esegui(partita).toString());
+		assertEquals("Dove vuoi andare?\n",Vai.esegui(partita).toString());
 	}
 	@Test
 	void testVaiDirezioneInesistente() {

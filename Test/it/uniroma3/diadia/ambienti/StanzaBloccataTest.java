@@ -17,7 +17,7 @@ class StanzaBloccataTest {
 		StanzaSbloccata=new StanzaBloccata("Cucina");
 		StanzaSbloccata.addAttrezzo(attrezzi[4]);
 		
-		StanzaBloccata = new StanzaBloccata("Bagno","ATTREZZO","");
+		StanzaBloccata = new StanzaBloccata("Bagno","ATTREZZO","pugnale","caciavite");
 		StanzaBloccata.impostaStanzaAdiacente("nord",StanzaSbloccata);
 		StanzaBloccata.impostaStanzaAdiacente("sud",StanzaBloccata);
 		StanzaBloccata.impostaStanzaAdiacente("est",StanzaSbloccata);
@@ -30,30 +30,28 @@ class StanzaBloccataTest {
 	void testImpostaDirezioniBloccate() {
 		StanzaBloccata.impostaDirezioneBloccata("nord");
 		StanzaBloccata.impostaDirezioneBloccata("sud");
-		assertEquals(StanzaBloccata.getDirezioniBloccate()[0],"nord");
-		assertEquals(StanzaBloccata.getDirezioniBloccate()[1],"sud");
-		assertNull(StanzaBloccata.getDirezioniBloccate()[2]);
+		assertEquals(StanzaBloccata.getDirezioniBloccate().get(0),"nord");
+		assertEquals(StanzaBloccata.getDirezioniBloccate().get(1),"sud");
 	}
 	
 	@Test
-	void testGetDirezioniStanzabloccataConTutteLeDirezioneBloccate() {
+	void testGetDirezioniStanzabloccataConDueDirezioneBloccate() {
 		StanzaBloccata.impostaDirezioneBloccata("nord");
 		StanzaBloccata.impostaDirezioneBloccata("sud");
-		assertNull(StanzaBloccata.getDirezioni()[0]);
-		assertNull(StanzaBloccata.getDirezioni()[1]);
+		assertEquals(StanzaBloccata.getDirezioni().get(0),"est");
+		assertEquals(StanzaBloccata.getDirezioni().get(1),"ovest");
 	}
 	
 	@Test
 	void testGetDirezioniStanzabloccataConAlmenoUnaDirezioneSbloccata() {
 		StanzaBloccata.impostaDirezioneBloccata("nord");
-		assertNull(StanzaBloccata.getDirezioni()[0]);
-		assertEquals(StanzaBloccata.getDirezioni()[1],"sud");
+		assertEquals(StanzaBloccata.getDirezioni().get(0),"sud");
 	}
 	
 	@Test
 	void testGetDirezioniStanzabloccataConZeroDirezioniBloccate() {
-		assertEquals(StanzaBloccata.getDirezioni()[0],"nord");
-		assertEquals(StanzaBloccata.getDirezioni()[1],"sud");
+		assertEquals(StanzaBloccata.getDirezioni().get(0),"nord");
+		assertEquals(StanzaBloccata.getDirezioni().get(1),"sud");
 	}
 	
 	@Test
@@ -62,17 +60,18 @@ class StanzaBloccataTest {
 		StanzaBloccata.impostaDirezioneBloccata("sud");
 		StanzaBloccata.impostaDirezioneBloccata("est");
 		StanzaBloccata.impostaDirezioneBloccata("ovest");
-		assertEquals(StanzaBloccata.getDirezioniBloccate()[0],"nord");
-		assertEquals(StanzaBloccata.getDirezioniBloccate()[1],"sud");
-		assertEquals(StanzaBloccata.getDirezioniBloccate()[2],"est");
+		assertEquals(StanzaBloccata.getDirezioniBloccate().get(0),"nord");
+		assertEquals(StanzaBloccata.getDirezioniBloccate().get(1),"sud");
+		assertEquals(StanzaBloccata.getDirezioniBloccate().get(2),"est");
+		assertEquals(StanzaBloccata.getDirezioni().get(0),"ovest");
 	}
 	
 	@Test
 	void testGetDirezioniStanzaSbloccataConTutteLeDirezioneBloccate() {
 		StanzaSbloccata.impostaDirezioneBloccata("nord");
 		StanzaSbloccata.impostaDirezioneBloccata("sud");
-		assertEquals(StanzaSbloccata.getDirezioniBloccate()[0],"nord");
-		assertEquals(StanzaSbloccata.getDirezioniBloccate()[1],"sud");
+		assertEquals(StanzaSbloccata.getDirezioniBloccate().get(0),"nord");
+		assertEquals(StanzaSbloccata.getDirezioniBloccate().get(1),"sud");
 	}
 	
 	

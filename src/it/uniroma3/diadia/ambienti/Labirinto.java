@@ -45,13 +45,16 @@ public class Labirinto {
 		this.genera_percorso();
 	}
 	
+	public Labirinto(Stanza entrata, Stanza uscita){
+		this.init(entrata, uscita);
+	}
+	
 	/**
 	 * imposta l'entrata e l'uscita
 	 * @param entrata desiderata
 	 * @param uscita desiderata
 	 */
 	private void init(Stanza entrata, Stanza uscita) {
-		/* imposta l'uscita e l'entrata del labirinto */
 		this.entrata = entrata;
 		this.uscita = uscita;
 	}
@@ -79,7 +82,6 @@ public class Labirinto {
 		this.inserisci_attrezzi(aulaN10, osso);
 		this.inserisci_attrezzi(aulaN10, spada);
 		this.inserisci_attrezzi(aulaN10, cassa);
-
 	}
 	
 	/**

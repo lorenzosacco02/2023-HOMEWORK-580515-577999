@@ -39,12 +39,12 @@ class ComandoPosaTest {
 	void testRimuoviStanzaInesistente() {
 		this.partita.setStanzaCorrente(null);
 		Posa.setParametro("Attrezzo");
-		assertEquals("Oggetto o Stanza innesistente",Posa.esegui(partita).toString());
+		assertEquals("Stanza innesistente",Posa.esegui(partita).toString());
 	}
 	@Test
 	void testRimuoviAttrezzoInesistente() {
 		Posa.setParametro(null);
-		assertEquals("Oggetto o Stanza innesistente",Posa.esegui(partita).toString());
+		assertEquals("Che attrezzo vuoi posare?",Posa.esegui(partita).toString());
 	}
 	@Test
 	void testRimuoviAttrezzoNonTrovato() {

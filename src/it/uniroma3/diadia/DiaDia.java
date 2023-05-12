@@ -31,7 +31,7 @@ public class DiaDia {
 
 	private Partita partita;
 	private IOConsole console;
-	private FabbricaDiComandiFisarmonica Fabbrica;
+	private FabbricaDiComandi Fabbrica;
 
 	/**
 	 * Inizializza una nuova Partita e una Console
@@ -39,7 +39,7 @@ public class DiaDia {
 	public DiaDia(IO io) {
 		this.partita = new Partita();
 		this.console = (IOConsole) io;
-		this.Fabbrica= new FabbricaDiComandiFisarmonica();
+		this.Fabbrica= new FabbricaDiComandiMap();
 	}
 
 	/**

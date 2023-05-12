@@ -128,4 +128,8 @@ class StanzaTest {
 	void testGetNumeroAttrezziStanzaVuota() {
 		assertEquals(0,StanzaSenzaNomeVuota.getNumeroAttrezzi());
 	}
+	@Test 
+	void testHasAttrezzo() {
+		assertTrue(StanzaPiena.hasAttrezzo("Attrezzo"));
+	}
 }

@@ -1,13 +1,17 @@
 package it.uniroma3.diadia.comandi;
+import java.util.HashSet;
+import java.util.Set;
+
 import it.uniroma3.diadia.*;
 
 public class ComandoAiuto implements Comando{
 
-	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "prendi", "posa", "borsa"};
+	private Set<String> elencoComandi;
 	private String parametro;
-	
-	
+
+
 	public ComandoAiuto(){
+		this.elencoComandi=new HashSet<String>();
 		parametro = null;
 	}
 
@@ -25,16 +29,7 @@ public class ComandoAiuto implements Comando{
 		case "aiuto":
 			string.append("Il comando aiuto ti da informazioni su tutti i comandi del gioco\nsi scriva aiuto e una di queste opzioni ");
 		case "":
-			string.append("[");
-			for (int i = 0; i < elencoComandi.length; i++) {
-				if(i==0)
-					string.append(elencoComandi[i]);
-				else{
-					string.append(" ");
-					string.append(elencoComandi[i]);
-				}
-			}
-			string.append("]");
+			string.append(this.getElencoComandi().toString());
 			break;
 		case "vai":
 			string.append("Il comando vai ti fa andare nella stanza adiacente a quella in cui ti trovi nella direzione da te indicata\nsi scriva vai e una di queste opzioni [nord sud est ovest]");
@@ -58,14 +53,25 @@ public class ComandoAiuto implements Comando{
 		}
 		return string;
 	}
-	
+
 	@Override
 	public String getNome() {
 		return "ComandoAiuto";
 	}
-	
+
 	@Override
 	public String getParametro() {
 		return this.parametro;
 	}
+	
+	public void setElencoComandi(Set<String> elencoComandi) {
+		Set<String> Temp=new HashSet<String>(elencoComandi);
+		Temp.remove("comandononvalido");
+		this.elencoComandi=Temp;
+	}
+	
+	public Set<String> getElencoComandi() {
+		return elencoComandi;
+	}
+
 }

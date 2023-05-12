@@ -20,7 +20,7 @@ class AttrezzoTest {
 	
 	@Test
 	void testGetNomeAttrezzoVuoto() {
-		assertNull(AttrezzoVuoto.getNome());
+		assertEquals("",AttrezzoVuoto.getNome());
 	}
 	
 	@Test
@@ -57,7 +57,7 @@ class AttrezzoTest {
 	
 	@Test
 	void testToStringAttrezzoVuoto() {
-		assertEquals("null (0kg)",AttrezzoVuoto.toString());
+		assertEquals(" (0kg)",AttrezzoVuoto.toString());
 	}
 	
 	@Test

@@ -42,23 +42,18 @@ class StanzaMagicaTest {
 		assertTrue(StanzaConNome.addAttrezzo(attrezzi[0]));
 	}
 
-	@Test
-	void testAddAttrezzoStanzaPiena(){
-		assertFalse(StanzaPiena.addAttrezzo(attrezzi[4]));
-	}
-
 	//Test del mettodo GetArrayDiAttrezzi prima di diventare magica
 
 	@Test
 	void testGetArrayDiAttrezziNomeStanzaSenzaNomeVuota() {
-		for(int i=0;i<10;i++)
-			assertEquals(arrayVuoto[i].getNome(),StanzaSenzaNomeVuota.getArrayDiAttrezzi()[i].getNome());
+		for(int i=0;i<StanzaSenzaNomeVuota.getListaDiAttrezzi().size();i++)
+			assertEquals(arrayVuoto[i].getNome(),StanzaSenzaNomeVuota.getListaDiAttrezzi().get(i).getNome());
 	}
 
 	@Test
 	void testGetArrayDiAttrezziPesoStanzaSenzaNomeVuota() {
-		for(int i=0;i<10;i++)
-			assertEquals(arrayVuoto[i].getPeso(),StanzaSenzaNomeVuota.getArrayDiAttrezzi()[i].getPeso());
+		for(int i=0;i<StanzaSenzaNomeVuota.getListaDiAttrezzi().size();i++)
+			assertEquals(arrayVuoto[i].getPeso(),StanzaSenzaNomeVuota.getListaDiAttrezzi().get(i).getPeso());
 	}
 
 	//Test del mettodo Add Attrezzo dopo essere diventata magica
@@ -71,11 +66,6 @@ class StanzaMagicaTest {
 		assertTrue(StanzaConNome.addAttrezzo(attrezzi[0]));
 	}
 
-	@Test
-	void testAddAttrezzoStanzaPienaMagica(){
-		assertFalse(StanzaPiena.addAttrezzo(attrezzi[4]));
-	}
-
 	//Test del mettodo GetArrayDiAttrezzi dopo esser diventata magica
 
 	@Test
@@ -85,8 +75,8 @@ class StanzaMagicaTest {
 		this.StanzaSenzaNomeVuota.addAttrezzo(attrezzi[3]);
 		this.StanzaSenzaNomeVuota.addAttrezzo(attrezzi[4]);
 		for(int i=1;i<5;i++) {
-			assertEquals(attrezzi[i].getNome(),StanzaSenzaNomeVuota.getArrayDiAttrezzi()[i-1].getNome());
+			assertEquals(attrezzi[i].getNome(),StanzaSenzaNomeVuota.getListaDiAttrezzi().get(i-1).getNome());
 		}
-		assertEquals("ananaB",StanzaSenzaNomeVuota.getArrayDiAttrezzi()[3].getNome());
+		assertEquals("ananaB",StanzaSenzaNomeVuota.getListaDiAttrezzi().get(3).getNome());
 	}
 }

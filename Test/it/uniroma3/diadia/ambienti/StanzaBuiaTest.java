@@ -26,14 +26,14 @@ class StanzaBuiaTest {
 	
 	@Test
 	void testGetDescrizioneStanzaConAttrezzoLuminoso() {
-		assertEquals(StanzaPienaConLuce.getDescrizione(),StanzaPienaConLuce.getNome()+"\nUscite: \nAttrezzi nella stanza: "+attrezzi[4].toString()+" ");
+		assertEquals(StanzaPienaConLuce.getDescrizione(),StanzaPienaConLuce.getNome()+"\nUscite: \nAttrezzi nella stanza: "+attrezzi[4].toString());
 	}
 	
 	@Test
 	void testGetDescrizioneStanzaBuiaInseriscoAttrezzoLuminoso() {
 		assertEquals(StanzaSenzaLuce.getDescrizione(),"qui c'è un buio pesto");
 		StanzaSenzaLuce.addAttrezzo(attrezzi[3]);
-		assertEquals(StanzaSenzaLuce.getDescrizione(),StanzaSenzaLuce.getNome()+"\nUscite: \nAttrezzi nella stanza: "+attrezzi[3].toString()+" ");
+		assertEquals(StanzaSenzaLuce.getDescrizione(),StanzaSenzaLuce.getNome()+"\nUscite: \nAttrezzi nella stanza: "+attrezzi[3].toString());
 	}
 
 }
