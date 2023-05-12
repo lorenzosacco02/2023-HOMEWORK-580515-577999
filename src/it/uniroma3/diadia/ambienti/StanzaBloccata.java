@@ -20,6 +20,7 @@ import java.util.List;
 public class StanzaBloccata extends Stanza{
 	private List<String> direzioniBloccate;
 	private List<String> oggettiSbloccanti;
+	private boolean bloccata;
 	static final private int NUMERO_MASSIMO_DIREZIONI_BLOCCATE = 3;
 	final static private String OGGETTI_DEFAULT = "piedediporco passepartout cacciavite";
 
@@ -33,6 +34,7 @@ public class StanzaBloccata extends Stanza{
 		super(nome);
 		this.oggettiSbloccanti= new LinkedList<String>(Arrays.asList(oggetti.split(" ")));
 		this.direzioniBloccate= new LinkedList<String>();
+		this.bloccata=true;
 		if(direzioni!=null)
 		this.direzioniBloccate.addAll(Arrays.asList(direzioni.split(" ", NUMERO_MASSIMO_DIREZIONI_BLOCCATE)));
 	}
@@ -59,31 +61,35 @@ public class StanzaBloccata extends Stanza{
 
 	@Override
 	public List<String> getDirezioni() {
-		sblocca_stanza();
+		//this.sblocca_stanza();
 		List<String> Direzioni=super.getDirezioni();
-		if(direzioniBloccate.size()!=0)
+		if(this.bloccata)
 		Direzioni.removeAll(direzioniBloccate);
 		return Direzioni;
 	}
-
+	@Override
+	public boolean addAttrezzo(Attrezzo attrezzo) {
+		if(attrezzo!=null && this.oggettiSbloccanti.contains(attrezzo.getNome())) 
+			this.bloccata=false;
+		return super.addAttrezzo(attrezzo);
+	}
 
 
 	/**
 	 * Controlla se l'attrezzo sbloccante è presente nella stanza
 	 * in caso ci sia sblocca tutte le direzioni e la stanza si comporta normalmente
 	 */
-	private void sblocca_stanza(){
-		ListIterator<Attrezzo> i = super.getListaDiAttrezzi().listIterator();
-		ListIterator<String> j = this.oggettiSbloccanti.listIterator();
+	/*public boolean sblocca_stanza(){
+		ListIterator<String> i = this.oggettiSbloccanti.listIterator();
 		while(i.hasNext()) {
-			while(j.hasNext()) {
-				if(i.next().toString().equals(j.next())) {
-					this.direzioniBloccate.removeAll(direzioniBloccate);
+			String attuale=i.next();
+				if(this.hasAttrezzo(attuale)) {
+					return this.direzioniBloccate.removeAll(direzioniBloccate);
 				}
-			}	
-		}
-	}
-
+			}
+		return true;
+		}*/
+	
 	public List<String> getDirezioniBloccate() {
 		return this.direzioniBloccate;
 	}

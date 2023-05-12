@@ -18,8 +18,8 @@ class StanzaBloccataTest {
 		StanzaSbloccata=new StanzaBloccata("Cucina");
 		StanzaSbloccata.addAttrezzo(attrezzi[4]);
 		
-		StanzaBloccata = new StanzaBloccata("Bagno","ATTREZZO pugnale caciavite");
-		StanzaSbloccataConNuovoCostruttore= new StanzaBloccata("Bagno","nord sud","ATTREZZO pugnale caciavite");
+		StanzaBloccata = new StanzaBloccata("Bagno","attrezzo pugnale caciavite");
+		StanzaSbloccataConNuovoCostruttore= new StanzaBloccata("Bagno","nord sud","attrezzo pugnale caciavite piedediporco");
 		StanzaSbloccataConNuovoCostruttore.impostaStanzaAdiacente("nord",StanzaSbloccata);
 		StanzaSbloccataConNuovoCostruttore.impostaStanzaAdiacente("sud",StanzaBloccata);
 		StanzaSbloccataConNuovoCostruttore.impostaStanzaAdiacente("est",StanzaBloccata);
@@ -96,8 +96,8 @@ class StanzaBloccataTest {
 	}
 	@Test
 	void testGetDirezioniStanzaToStringNuovoCostuttoreBloccaDirrezioniConLaStanzaSbloccata() {
-		StanzaSbloccataConNuovoCostruttore.addAttrezzo(attrezzi[4]);
-		assertNull(StanzaSbloccataConNuovoCostruttore.getDirezioni());
+		assertTrue(StanzaSbloccataConNuovoCostruttore.addAttrezzo(attrezzi[4]));
+		assertEquals(StanzaSbloccataConNuovoCostruttore.getDirezioni().toString(),"[nord, sud, est, ovest]");
 	}
 	
 	
