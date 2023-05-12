@@ -21,27 +21,31 @@ public class StanzaBloccata extends Stanza{
 	private List<String> direzioniBloccate;
 	private List<String> oggettiSbloccanti;
 	static final private int NUMERO_MASSIMO_DIREZIONI_BLOCCATE = 3;
-	final static private String[] OGGETTI_DEFAULT = {"piedediporco","passepartout","cacciavite"};
+	final static private String OGGETTI_DEFAULT = "piedediporco passepartout cacciavite";
 
 	public StanzaBloccata(String nome) {
-		this(nome, OGGETTI_DEFAULT);
+		this(nome,null, OGGETTI_DEFAULT);
 	}
-
-	public StanzaBloccata(String nome, String... oggetti) {
+	public StanzaBloccata(String nome,String oggetti) {
+		this(nome,null, oggetti);
+	}
+	public StanzaBloccata(String nome,String direzioni, String oggetti) {
 		super(nome);
-		this.oggettiSbloccanti= new LinkedList<String>(Arrays.asList(oggetti));
+		this.oggettiSbloccanti= new LinkedList<String>(Arrays.asList(oggetti.split(" ")));
 		this.direzioniBloccate= new LinkedList<String>();
+		if(direzioni!=null)
+		this.direzioniBloccate.addAll(Arrays.asList(direzioni.split(" ", NUMERO_MASSIMO_DIREZIONI_BLOCCATE)));
 	}
 
 	/**
 	 * Permette di impostare la direzione bloccata nella stanza
 	 * @param Stringa con la direzione da bloccare
 	 */
-	public void impostaDirezioneBloccata(String[] direzione){
+	/*public void impostaDirezioneBloccata(String[] direzione){
 		for(String i :direzione){
 			impostaDirezioneBloccata(i);
 		}
-	}
+	}*/
 	public void impostaDirezioneBloccata(String direzione) {
 		if (this.direzioniBloccate.size()<NUMERO_MASSIMO_DIREZIONI_BLOCCATE) {
 			this.direzioniBloccate.add(direzione);
@@ -57,6 +61,7 @@ public class StanzaBloccata extends Stanza{
 	public List<String> getDirezioni() {
 		sblocca_stanza();
 		List<String> Direzioni=super.getDirezioni();
+		if(direzioniBloccate.size()!=0)
 		Direzioni.removeAll(direzioniBloccate);
 		return Direzioni;
 	}

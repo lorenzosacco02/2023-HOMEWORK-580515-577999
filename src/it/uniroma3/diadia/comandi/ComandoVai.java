@@ -16,10 +16,10 @@ public class ComandoVai implements Comando{
 	}
 
 	@Override
-	public StringBuilder esegui(Partita partita){
+	public String esegui(Partita partita){
 		StringBuilder string= new StringBuilder("");
 		if(this.Parametro==null)
-			return string.append("Dove vuoi andare?\n"); 
+			return string.append("Dove vuoi andare?\n").toString(); 
 		else {
 			Stanza prossimaStanza = null;
 			prossimaStanza = partita.getStanzaCorrente().getStanzaAdiacente(this.Parametro);
@@ -31,7 +31,7 @@ public class ComandoVai implements Comando{
 				string.append("CFU rimasti: "+partita.getPlayer().getCfu()+"\n");
 			}
 		}
-		return string.append(partita.getStanzaCorrente().getDescrizione());
+		return string.append(partita.getStanzaCorrente().getDescrizione()).toString();
 	}   
 
 	@Override

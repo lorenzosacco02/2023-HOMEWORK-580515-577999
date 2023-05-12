@@ -10,9 +10,9 @@ public class ComandoBorsa implements Comando{
 	}
 	
 	@Override
-	public StringBuilder esegui(Partita partita){
+	public String esegui(Partita partita){
 		StringBuilder String = new StringBuilder(partita.getPlayer().getBorsa().toString());
-		return String;
+		return String.toString();
 	}
 
 	@Override

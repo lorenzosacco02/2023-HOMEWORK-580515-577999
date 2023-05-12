@@ -10,9 +10,9 @@ public class ComandoFine implements Comando{
 	}
 
 	@Override
-	public StringBuilder esegui(Partita partita){
+	public String esegui(Partita partita){
 		StringBuilder string = new StringBuilder("Grazie di aver giocato!");
-		return string;
+		return string.toString();
 	}
 	
 	@Override

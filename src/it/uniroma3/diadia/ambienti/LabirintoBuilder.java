@@ -60,8 +60,8 @@ public class LabirintoBuilder {
 		return this;
 	}
 	
-	public LabirintoBuilder addStanzaBloccata(String NomeStanza,String direzioni, String... oggetti){
-		StanzaBloccata attuale=new StanzaBloccata(NomeStanza,oggetti);
+	public LabirintoBuilder addStanzaBloccata(String NomeStanza,String direzioni, String oggetti){
+		StanzaBloccata attuale=new StanzaBloccata(NomeStanza,direzioni,oggetti);
 		attuale.impostaDirezioneBloccata(direzioni);
 		this.addStanzaStandard(attuale);
 		return this;

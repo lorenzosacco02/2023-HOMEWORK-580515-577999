@@ -141,15 +141,11 @@ public class Borsa{
 	 * @return attrezzo con il nome desiderato
 	 */
 	public Attrezzo getAttrezzo(String attrezzo) {
-		ListIterator<Attrezzo> i = attrezzi.listIterator();
-		Attrezzo temp=null;
-		while(i.hasNext()){
-			temp = i.next();
-			if(temp.getNome().equals(attrezzo)){
-				return temp;
-			}
+		Attrezzo attrezzoCercato = new Attrezzo(attrezzo,0);
+		if(attrezzo!=null && attrezzi.indexOf(attrezzoCercato)!=-1) {
+			return attrezzi.get(attrezzi.indexOf(attrezzoCercato));
 		}
-		return null;
+			return null;
 	}
 
 	/**

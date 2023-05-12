@@ -10,6 +10,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 class StanzaBloccataTest {
 	private StanzaBloccata StanzaBloccata;
 	private StanzaBloccata StanzaSbloccata;
+	private StanzaBloccata StanzaSbloccataConNuovoCostruttore;
 	private Attrezzo[] attrezzi={new Attrezzo(),new Attrezzo("",5),new Attrezzo("Attrezzo",0),new Attrezzo("ATTREZZO",5),new Attrezzo("piedediporco",200)};
 	
 	@BeforeEach
@@ -17,7 +18,12 @@ class StanzaBloccataTest {
 		StanzaSbloccata=new StanzaBloccata("Cucina");
 		StanzaSbloccata.addAttrezzo(attrezzi[4]);
 		
-		StanzaBloccata = new StanzaBloccata("Bagno","ATTREZZO","pugnale","caciavite");
+		StanzaBloccata = new StanzaBloccata("Bagno","ATTREZZO pugnale caciavite");
+		StanzaSbloccataConNuovoCostruttore= new StanzaBloccata("Bagno","nord sud","ATTREZZO pugnale caciavite");
+		StanzaSbloccataConNuovoCostruttore.impostaStanzaAdiacente("nord",StanzaSbloccata);
+		StanzaSbloccataConNuovoCostruttore.impostaStanzaAdiacente("sud",StanzaBloccata);
+		StanzaSbloccataConNuovoCostruttore.impostaStanzaAdiacente("est",StanzaBloccata);
+		StanzaSbloccataConNuovoCostruttore.impostaStanzaAdiacente("ovest",StanzaSbloccataConNuovoCostruttore);
 		StanzaBloccata.impostaStanzaAdiacente("nord",StanzaSbloccata);
 		StanzaBloccata.impostaStanzaAdiacente("sud",StanzaBloccata);
 		StanzaBloccata.impostaStanzaAdiacente("est",StanzaSbloccata);
@@ -72,6 +78,26 @@ class StanzaBloccataTest {
 		StanzaSbloccata.impostaDirezioneBloccata("sud");
 		assertEquals(StanzaSbloccata.getDirezioniBloccate().get(0),"nord");
 		assertEquals(StanzaSbloccata.getDirezioniBloccate().get(1),"sud");
+	}
+	@Test
+	void testGetDirezioniBloccateNuovoCostuttoreBloccaDirrezioni() {
+		assertEquals(StanzaSbloccataConNuovoCostruttore.getDirezioniBloccate().get(0),"nord");
+		assertEquals(StanzaSbloccataConNuovoCostruttore.getDirezioniBloccate().get(1),"sud");
+	}
+	
+	@Test
+	void testGetDirezioniStanzaNuovoCostuttoreBloccaDirrezioni() {
+		assertEquals(StanzaSbloccataConNuovoCostruttore.getDirezioni().get(0),"est");
+		assertEquals(StanzaSbloccataConNuovoCostruttore.getDirezioni().get(1),"ovest");
+	}
+	@Test
+	void testGetDirezioniStanzaToStringNuovoCostuttoreBloccaDirrezioni() {
+		assertEquals(StanzaSbloccataConNuovoCostruttore.getDirezioni().toString(),"[est, ovest]");
+	}
+	@Test
+	void testGetDirezioniStanzaToStringNuovoCostuttoreBloccaDirrezioniConLaStanzaSbloccata() {
+		StanzaSbloccataConNuovoCostruttore.addAttrezzo(attrezzi[4]);
+		assertNull(StanzaSbloccataConNuovoCostruttore.getDirezioni());
 	}
 	
 	

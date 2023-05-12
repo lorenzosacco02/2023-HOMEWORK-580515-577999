@@ -21,7 +21,7 @@ public class ComandoAiuto implements Comando{
 	}
 
 	@Override
-	public StringBuilder esegui(Partita partita){
+	public String esegui(Partita partita){
 		StringBuilder string = new StringBuilder("");
 		if(this.parametro==null)
 			this.setParametro("");
@@ -51,7 +51,7 @@ public class ComandoAiuto implements Comando{
 			string.append(parametro);
 			break;
 		}
-		return string;
+		return string.toString();
 	}
 
 	@Override

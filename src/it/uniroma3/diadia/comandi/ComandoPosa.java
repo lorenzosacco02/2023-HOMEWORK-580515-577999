@@ -14,7 +14,7 @@ public class ComandoPosa implements Comando{
 	}
 
 	@Override
-	public StringBuilder esegui(Partita partita){
+	public String esegui(Partita partita){
 		StringBuilder output=new StringBuilder("");
 		output.append(partita.getPlayer().RemoveAttrezzo( this.Oggetto , partita.getStanzaCorrente()));
 		Boolean Bool = output.toString().equals("Ho toccato il fondo, ma "+Oggetto+" non l'ho trovato");
@@ -23,10 +23,10 @@ public class ComandoPosa implements Comando{
 		Boolean Bool4 = output.toString().equals("Stanza innesistente");
 		if((Bool||Bool2||Bool3||Bool4)==false)  {
 			partita.getPlayer().setCfu(partita.getPlayer().getCfu()-1);
-			return output.append("\nCFU rimasti: "+ partita.getPlayer().getCfu());
+			return output.append("\nCFU rimasti: "+ partita.getPlayer().getCfu()).toString();
 		}
 		else 
-			return output;
+			return output.toString();
 	}
 	
 	@Override

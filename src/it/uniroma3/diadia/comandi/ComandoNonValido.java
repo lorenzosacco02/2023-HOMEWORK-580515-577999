@@ -13,9 +13,9 @@ public class ComandoNonValido implements Comando{
 	}
 	
 	@Override
-	public StringBuilder esegui(Partita partita){
+	public String esegui(Partita partita){
 		StringBuilder string = new StringBuilder("Comando sconosciuto");
-		return string;
+		return string.toString()
 	}
 	
 	@Override
