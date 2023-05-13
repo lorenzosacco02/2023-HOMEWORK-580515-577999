@@ -15,7 +15,7 @@ public class FabbricaDiComandiMap implements FabbricaDiComandi {
 		Comandi.put("aiuto", new ComandoAiuto());
 		Comandi.put("prendi", new ComandoPrendi());
 		Comandi.put("posa", new ComandoPosa());
-		Comandi.put("borsa", new ComandoBorsa());
+		Comandi.put("info", new ComandoInfo());
 		this.elencoDiComandi();
 	}
 	

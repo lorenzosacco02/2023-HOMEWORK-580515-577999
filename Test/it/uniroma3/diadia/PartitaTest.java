@@ -21,10 +21,10 @@ void Setup(){
 	this.Lab=this.partita.getLabirinto();
 	this.partita.setStanzaCorrente(stanzaConNome);
 }
-	//Test del metodo getStanzaVincente
+	//Test del metodo getUscita
 	@Test
-	void testGetStanzaVincente() {
-		assertEquals(this.Lab.getUscita(),this.partita.getStanzaVincente());
+	void testgetUscita() {
+		assertEquals(this.Lab.getUscita(),this.partita.getUscita());
 	}
 	
 	//Test  del metodo SetStanzaCorrente 

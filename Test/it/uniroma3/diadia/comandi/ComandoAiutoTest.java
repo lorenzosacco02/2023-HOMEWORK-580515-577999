@@ -43,9 +43,9 @@ class ComandoAiutoTest {
 		assertEquals("Il comando posa ti fa lasciare un attrezzo nella stanza in cui ti trovi\nsi scriva posa e il nome del attrezzo che vuoi prendere",Aiuto.esegui(partita).toString());
 	}
 	@Test
-	void testAiutoBorsa() {
-		Aiuto.setParametro("borsa");
-		assertEquals("Il comando borsa ti permette di vedere quali oggetti hai nella tua borsa con i relativi pesi",Aiuto.esegui(partita).toString());
+	void testAiutoInfo() {
+		Aiuto.setParametro("info");
+		assertEquals("Il comando info ti permette di ricevere informazioni sulla stanza in qui ti trovi o sulla tua borsa con tutti gli oggetti con i relativi pesi\nsi scriva info e una di queste opzioni [borsa stanza]",Aiuto.esegui(partita).toString());
 	}
 	@Test
 	void testAiutoSenzaArgomento() {

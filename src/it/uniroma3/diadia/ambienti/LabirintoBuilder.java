@@ -1,5 +1,6 @@
 package it.uniroma3.diadia.ambienti;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
@@ -111,4 +112,14 @@ public class LabirintoBuilder {
 			return null;
 		}
 	}
+
+	/*public List<String> getMappaStanze() {
+		return this.MappaStanze.keySet().stream().toList();
+	}*/
+
+	public Map<String, Stanza> getMappaStanze() {
+		return MappaStanze;
+	}
+
+	
 }

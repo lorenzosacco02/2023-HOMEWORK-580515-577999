@@ -99,7 +99,5 @@ class StanzaBloccataTest {
 		assertTrue(StanzaSbloccataConNuovoCostruttore.addAttrezzo(attrezzi[4]));
 		assertEquals(StanzaSbloccataConNuovoCostruttore.getDirezioni().toString(),"[nord, sud, est, ovest]");
 	}
-	
-	
 
 }

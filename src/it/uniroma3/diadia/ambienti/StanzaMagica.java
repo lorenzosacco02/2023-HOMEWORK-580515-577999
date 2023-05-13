@@ -53,4 +53,8 @@ public class StanzaMagica extends Stanza {
 	public void setContatoreAttrezziPosati(int contatore){
 		this.contatoreAttrezziPosati = contatore;
 	}
+	@Override
+	public String getDescrizione(){
+			return (super.getDescrizione()+"\nIn questa Stanza sucedono cose strane quasi maggiche");
+	}
 }

@@ -93,4 +93,12 @@ public class StanzaBloccata extends Stanza{
 	public List<String> getDirezioniBloccate() {
 		return this.direzioniBloccate;
 	}
-}
+	@Override
+	public String getDescrizione(){
+			if(this.bloccata) {
+			return super.getDescrizione()+"\nDai segni sul pavimento deduco che ci sono altri passaggi oltre a questi portei usare\n"+this.oggettiSbloccanti+"per cercare di riaprire tutti i passaggi";
+			}
+			return super.getDescrizione();
+		}
+	}
+

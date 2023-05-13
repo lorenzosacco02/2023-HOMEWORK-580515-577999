@@ -43,8 +43,8 @@ public class ComandoAiuto implements Comando{
 		case "posa":
 			string.append("Il comando posa ti fa lasciare un attrezzo nella stanza in cui ti trovi\nsi scriva posa e il nome del attrezzo che vuoi prendere");
 			break;
-		case "borsa":
-			string.append("Il comando borsa ti permette di vedere quali oggetti hai nella tua borsa con i relativi pesi");
+		case "info":
+			string.append("Il comando info ti permette di ricevere informazioni sulla stanza in qui ti trovi o sulla tua borsa con tutti gli oggetti con i relativi pesi\nsi scriva info e una di queste opzioni [borsa stanza]");
 			break;
 		default:
 			string.append("non esiste il comando:\n");

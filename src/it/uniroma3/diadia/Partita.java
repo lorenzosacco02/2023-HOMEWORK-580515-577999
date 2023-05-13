@@ -35,7 +35,7 @@ public class Partita {
 	 * Restituisce la stanza vincente
 	 * @return stanza di uscita dal labirinto
 	 */
-	public Stanza getStanzaVincente() {
+	public Stanza getUscita() {
 		return this.Lab.getUscita();
 	}
 

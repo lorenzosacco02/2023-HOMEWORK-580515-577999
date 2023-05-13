@@ -16,8 +16,8 @@ public class Labirinto {
 	/**
 	 * crea entrata e uscita del labirinto 
 	 */
-	public Stanza entrata;
-	public Stanza uscita;
+	private Stanza entrata;
+	private Stanza uscita;
 
 	/** 
 	 * crea gli attrezzi 

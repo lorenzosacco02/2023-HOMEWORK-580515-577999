@@ -71,10 +71,10 @@ public class DiaDia {
 	 * @return true solo se partita è vinta o finita, false altrimenti
 	 */
 	private boolean processaIstruzione (Comando comandoCostruito, IOConsole console) {
-		String stampa = comandoCostruito.esegui(this.partita).toString();
+		String stampa = comandoCostruito.esegui(this.partita);
 		String Parametro;
 
-		switch(stampa.toString()){
+		switch(stampa){
 		case "Che attrezzo vuoi posare?":
 			do{
 				console.mostraMessaggio("Che oggetto vuoi posare?");
@@ -82,7 +82,7 @@ public class DiaDia {
 			}
 			while(Parametro.equals(""));
 			comandoCostruito.setParametro(Parametro);
-			stampa = comandoCostruito.esegui(this.partita).toString();
+			stampa = comandoCostruito.esegui(this.partita);
 			break;
 
 		case "Che attrezzo vuoi prendere?":
@@ -92,7 +92,7 @@ public class DiaDia {
 			}
 			while(Parametro.equals(""));
 			comandoCostruito.setParametro(Parametro);
-			stampa = comandoCostruito.esegui(this.partita).toString();
+			stampa = comandoCostruito.esegui(this.partita);
 			break;
 
 		case "Dove vuoi andare?\n":
@@ -102,7 +102,16 @@ public class DiaDia {
 			}
 			while(Parametro.equals(""));
 			comandoCostruito.setParametro(Parametro);
-			stampa = comandoCostruito.esegui(this.partita).toString();
+			stampa = comandoCostruito.esegui(this.partita);
+			break;
+		case "Su cosa vuoi avere le informazioni?":
+			do{
+				console.mostraMessaggio("Su cosa vuoi avere le informazioni?");
+				Parametro = console.leggiRiga();
+			}
+			while(Parametro.equals(""));
+			comandoCostruito.setParametro(Parametro);
+			stampa = comandoCostruito.esegui(this.partita);
 			break;
 
 		case "Grazie di aver giocato!":
