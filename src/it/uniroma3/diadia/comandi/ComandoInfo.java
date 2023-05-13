@@ -20,7 +20,7 @@ public class ComandoInfo implements Comando {
 			string.append(partita.getPlayer().getBorsa().toString());
 			break;
 		case "stanza":
-			string.append(partita.getStanzaCorrente().toString());
+			string.append(partita.getStanzaCorrente().getDescrizione());
 			break;
 		default:
 			string.append("Non esiste alcuna info su: ");

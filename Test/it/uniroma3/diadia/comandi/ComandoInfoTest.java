@@ -70,38 +70,65 @@ private Partita P;
 	@Test
 	void testComandoInfoConParametroStanzaMagicaSenzaOggetti() {
 		this.P.setStanzaCorrente(StanzaMagica);
-		assertEquals("Una comunissima Stanza\n"+ "Uscite: \n"+ "Attrezzi nella stanza: ",this.comandoStanza.esegui(P));
+		assertEquals("Una comunissima Stanza\n"+ "Uscite: \n"+ "Attrezzi nella stanza: \n"+"In questa Stanza sucedono cose strane quasi maggiche",this.comandoStanza.esegui(P));
 	}
 	@Test
 	void testComandoInfoConParametroStanzaMagicaConOggetti() {
 		this.StanzaMagica.addAttrezzo(new Attrezzo("libro",5));
 		this.StanzaMagica.addAttrezzo(new Attrezzo("libro",5));
 		this.P.setStanzaCorrente(StanzaMagica);
-		assertEquals("Una comunissima Stanza\n"+ "Uscite: \n"+ "Attrezzi nella stanza: libro (5kg) orbil (10kg)",this.comandoStanza.esegui(P));
+		assertEquals("Una comunissima Stanza\n"+ "Uscite: \n"+ "Attrezzi nella stanza: libro (5kg) orbil (10kg)\n"+"In questa Stanza sucedono cose strane quasi maggiche",this.comandoStanza.esegui(P));
 	}
+	//Test ComandoInfo con Parametro Stanza Bloccata
 	@Test
 	void testComandoInfoConParametroStanzaBloccataSenzaOggetti() {
-		
+		this.P.setStanzaCorrente(StanzaBloccata);
+		assertEquals("cucina\n"+ "Uscite: sud\n"+ "Attrezzi nella stanza: \n"+"Dai segni sul pavimento deduco che ci sono altri passaggi oltre a questi portei usare\n[chiave]\nper cercare di riaprire tutti i passaggi",this.comandoStanza.esegui(P));
 	}
 	@Test
 	void testComandoInfoConParametroStanzaBloccataConOggetti() {
-		
+		this.P.setStanzaCorrente(StanzaBloccata);
+		this.StanzaBloccata.addAttrezzo(new Attrezzo("libro",5));
+		assertEquals("cucina\n"+ "Uscite: sud\n"+ "Attrezzi nella stanza: libro (5kg)\n"+"Dai segni sul pavimento deduco che ci sono altri passaggi oltre a questi portei usare\n[chiave]\nper cercare di riaprire tutti i passaggi",this.comandoStanza.esegui(P));
 	}
 	@Test
+	void testComandoInfoConParametroStanzaBloccataConOggettiSbloccante() {
+		this.P.setStanzaCorrente(StanzaBloccata);
+		this.StanzaBloccata.addAttrezzo(new Attrezzo("chiave",5));
+		assertEquals("cucina\n"+ "Uscite: nord sud\n"+ "Attrezzi nella stanza: chiave (5kg)",this.comandoStanza.esegui(P));
+	}
+	//Test ComandoInfo con Parametro Stanza Buia
+	@Test
 	void testComandoInfoConParametroStanzaBuiaSenzaOggetti() {
-		
+		this.P.setStanzaCorrente(StanzaBuia);
+		assertEquals("qui c'è un buio pesto",this.comandoStanza.esegui(P));
 	}
 	@Test
 	void testComandoInfoConParametroStanzaBuiaConOggetti() {
-		
+		this.P.setStanzaCorrente(StanzaBuia);
+		this.StanzaBuia.addAttrezzo(new Attrezzo("libro",5));
+		assertEquals("qui c'è un buio pesto",this.comandoStanza.esegui(P));
 	}
-	//
+	@Test
+	void testComandoInfoConParametroStanzaBuiaConOggettiLuminoso() {
+		this.P.setStanzaCorrente(StanzaBuia);
+		this.StanzaBuia.addAttrezzo(new Attrezzo("torcia",5));
+		assertEquals("cantina\n"+ "Uscite: \n"+ "Attrezzi nella stanza: torcia (5kg)",this.comandoStanza.esegui(P));
+	}
+	//Test ComandoInfo con Parametro fuori dal ordinario
 	@Test
 	void testComandoInfoConParametroNull() {
-		
+		this.comando.setParametro(null);
+		assertEquals("Su cosa vuoi avere le informazioni?",this.comando.esegui(P));
+	}
+	@Test
+	void testComandoInfoConParametroStringaVuota() {
+		this.comando.setParametro("");
+		assertEquals("Su cosa vuoi avere le informazioni?",this.comando.esegui(P));
 	}
 	@Test
 	void testComandoInfoConParametroRandom() {
-		
+		this.comando.setParametro("sasso");
+		assertEquals("Non esiste alcuna info su: sasso",this.comando.esegui(P));
 	}
 }
