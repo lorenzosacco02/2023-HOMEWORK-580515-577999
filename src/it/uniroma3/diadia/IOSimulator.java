@@ -7,7 +7,7 @@ public class IOSimulator implements IO {
 
 	private List<String> righeLette;
 	private int indiceRigheLette;
-
+	
 	public List<String> getMessaggiProdotti() {
 		return messaggiProdotti;
 	}
@@ -31,7 +31,6 @@ public class IOSimulator implements IO {
 	@Override
 	public String leggiRiga() {
 		String riga = null;
-
 		riga = this.righeLette.get(indiceRigheLette);
 		this.indiceRigheLette++;
 		return riga;

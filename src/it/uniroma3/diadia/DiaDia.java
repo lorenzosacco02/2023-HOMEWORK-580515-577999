@@ -17,7 +17,7 @@ public class DiaDia {
 		DiaDia gioco = new DiaDia(io);
 		gioco.gioca();
 	}
-
+	
 	static final private String MESSAGGIO_BENVENUTO = ""
 			+ "Ti trovi nell'Universita', ma oggi e' diversa dal solito...\n"
 			+ "Meglio andare al piu' presto in biblioteca a studiare. Ma dov'e'?\n"

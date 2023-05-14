@@ -4,23 +4,24 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import it.uniroma3.diadia.Partita;
 
 class ComandoAiutoTest {
 	private Partita partita;
 	private ComandoAiuto Aiuto;
+	private FabbricaDiComandi factorytest;
 	
 	@BeforeEach
 	void setUp(){
-		Aiuto = new ComandoAiuto();
 		partita = new Partita();
+		factorytest = new FabbricaDiComandiMap();
+		Aiuto = (ComandoAiuto) factorytest.costruisciComando("aiuto");
 	}
 
 	@Test
 	void testAiutoAiuto() {
 		Aiuto.setParametro("aiuto");
-		assertEquals("Il comando aiuto ti da informazioni su tutti i comandi del gioco\nsi scriva aiuto e una di queste opzioni [vai aiuto fine prendi posa borsa]",Aiuto.esegui(partita).toString());
+		assertEquals("Il comando aiuto ti da informazioni su tutti i comandi del gioco\nsi scriva aiuto e una di queste opzioni [aiuto, prendi, fine, posa, vai, info]",Aiuto.esegui(partita).toString());
 	}
 	@Test
 	void testAiutoVai() {
@@ -50,7 +51,7 @@ class ComandoAiutoTest {
 	@Test
 	void testAiutoSenzaArgomento() {
 		Aiuto.setParametro("");
-		assertEquals("[vai aiuto fine prendi posa borsa]",Aiuto.esegui(partita).toString());
+		assertEquals("[aiuto, prendi, fine, posa, vai, info]",Aiuto.esegui(partita).toString());
 	}
 	@Test
 	void testAiutoDefault() {

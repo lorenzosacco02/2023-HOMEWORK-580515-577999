@@ -33,7 +33,7 @@ public class LabirintoBuilder {
 		this.addStanza(NomeUscita);
 		return this;
 	}
-
+	
 	public LabirintoBuilder addAdiacenza(String NomeStanza1,String NomeStanza2, String Direzione){
 		if(!this.MappaStanze.containsKey(NomeStanza1)){
 			this.addStanza(NomeStanza1);

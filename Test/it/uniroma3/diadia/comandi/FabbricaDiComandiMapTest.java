@@ -86,15 +86,16 @@ class FabbricaDiComandiMapTest {
 
 	@Test
 	void testFisarmonicaBorsa() {
-		command = Factory.costruisciComando("borsa");
-		assertEquals(command.getNome(),"ComandoBorsa");
-		assertNull(command.getParametro());
+		command = Factory.costruisciComando("info borsa");
+		assertEquals(command.getNome(),"ComandoInfo");
+		assertEquals(command.getParametro(),"borsa");
 	}
+	
 	@Test
 	void testFisarmonicaBorsaScrittoMale() {
-		command = Factory.costruisciComando("BoRSa?");
-		assertEquals(command.getNome(),"ComandoBorsa");
-		assertNull(command.getParametro());
+		command = Factory.costruisciComando("INFo?BoRSa");
+		assertEquals(command.getNome(),"ComandoInfo");
+		assertEquals(command.getParametro(),"borsa");
 	}
 
 	//Test del Comando Fine

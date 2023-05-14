@@ -55,6 +55,6 @@ public class StanzaMagica extends Stanza {
 	}
 	@Override
 	public String getDescrizione(){
-			return (super.getDescrizione()+"\nIn questa Stanza sucedono cose strane quasi maggiche");
+			return (super.getDescrizione()+"\nIn questa Stanza sucedono cose strane quasi magiche");
 	}
 }

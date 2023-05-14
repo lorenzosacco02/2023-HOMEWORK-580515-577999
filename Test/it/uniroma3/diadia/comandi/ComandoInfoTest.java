@@ -70,14 +70,14 @@ private Partita P;
 	@Test
 	void testComandoInfoConParametroStanzaMagicaSenzaOggetti() {
 		this.P.setStanzaCorrente(StanzaMagica);
-		assertEquals("Una comunissima Stanza\n"+ "Uscite: \n"+ "Attrezzi nella stanza: \n"+"In questa Stanza sucedono cose strane quasi maggiche",this.comandoStanza.esegui(P));
+		assertEquals("Una comunissima Stanza\n"+ "Uscite: \n"+ "Attrezzi nella stanza: \n"+"In questa Stanza sucedono cose strane quasi magiche",this.comandoStanza.esegui(P));
 	}
 	@Test
 	void testComandoInfoConParametroStanzaMagicaConOggetti() {
 		this.StanzaMagica.addAttrezzo(new Attrezzo("libro",5));
 		this.StanzaMagica.addAttrezzo(new Attrezzo("libro",5));
 		this.P.setStanzaCorrente(StanzaMagica);
-		assertEquals("Una comunissima Stanza\n"+ "Uscite: \n"+ "Attrezzi nella stanza: libro (5kg) orbil (10kg)\n"+"In questa Stanza sucedono cose strane quasi maggiche",this.comandoStanza.esegui(P));
+		assertEquals("Una comunissima Stanza\n"+ "Uscite: \n"+ "Attrezzi nella stanza: libro (5kg) orbil (10kg)\n"+"In questa Stanza sucedono cose strane quasi magiche",this.comandoStanza.esegui(P));
 	}
 	//Test ComandoInfo con Parametro Stanza Bloccata
 	@Test
