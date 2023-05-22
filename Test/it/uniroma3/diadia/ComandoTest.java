@@ -68,7 +68,7 @@ class ComandoTest {
 	@Test
 	void testAiutoAiuto() {
 		comando=this.Fabbrica.costruisciComando("aiuto aiuto");
-		assertEquals("Il comando aiuto ti da informazioni su tutti i comandi del gioco\nsi scriva aiuto e una di queste opzioni [aiuto, prendi, fine, posa, borsa, vai]",comando.esegui(partita));
+		assertEquals("Il comando aiuto ti da informazioni su tutti i comandi del gioco\nsi scriva aiuto e una di queste opzioni [aiuto, prendi, fine, posa, vai, info]",comando.esegui(partita));
 	}
 	@Test
 	void testAiutoVai() {
@@ -92,13 +92,13 @@ class ComandoTest {
 	}
 	@Test
 	void testAiutoBorsa() {
-		comando=this.Fabbrica.costruisciComando("aiuto borsa");
-		assertEquals("Il comando borsa ti permette di vedere quali oggetti hai nella tua borsa con i relativi pesi",comando.esegui(partita));
+		comando=this.Fabbrica.costruisciComando("aiuto info");
+		assertEquals("Il comando info ti permette di ricevere informazioni sulla stanza in qui ti trovi o sulla tua borsa con tutti gli oggetti con i relativi pesi\nsi scriva info e una di queste opzioni [borsa stanza]",comando.esegui(partita));
 	}
 	@Test
 	void testAiutoSenzaArgomento() {
 		comando=this.Fabbrica.costruisciComando("aiuto");
-		assertEquals("[aiuto, prendi, fine, posa, borsa, vai]",comando.esegui(partita));
+		assertEquals("[aiuto, prendi, fine, posa, vai, info]",comando.esegui(partita));
 	}
 	@Test
 	void testAiutoDefault() {
@@ -164,13 +164,13 @@ class ComandoTest {
 	//test Borsa
 	@Test
 	void testBorsaSuccesso() {
-		comando=this.Fabbrica.costruisciComando("Borsa");
+		comando=this.Fabbrica.costruisciComando("info borsa");
 		assertEquals("Contenuto borsa (5kg/10kg): Attrezzo (5kg) ",comando.esegui(partita));
 	}
 	@Test
 	void testBorsaVuota() {
 		this.Fabbrica.costruisciComando("posa Attrezzo").esegui(partita);
-		comando=this.Fabbrica.costruisciComando("Borsa");
+		comando=this.Fabbrica.costruisciComando("info borsa");
 		assertEquals("Borsa vuota",comando.esegui(partita));
 	}
 	

@@ -39,7 +39,7 @@ public class DiaDia {
 	public DiaDia(IO io) {
 		this.partita = new Partita();
 		this.console = (IOConsole) io;
-		this.Fabbrica= new FabbricaDiComandiMap();
+		this.Fabbrica= new FabbricaDiComandiRiflessiva();
 	}
 
 	/**

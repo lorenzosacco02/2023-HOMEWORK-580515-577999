@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -255,11 +254,9 @@ class LabirintoBuilderTest {
 	public void testLabirintoConStanzaMagica_AggiuntaElementoOltreSogliaMagica() {
 		String nomeAttrezzo1 = "attrezzo 1";
 		String nomeAttrezzo2 = "attrezzo 2";
-		String nomeAttrezzo2Inv = "2 ozzertta";
 		int sogliaMagica = 1;
 		int peso1 = 1;
 		int peso2 = 2;
-		int peso2_x2 = peso2*2;
 		String nomeStanzaMagica = "Stanza Magica";
 		this.labirintoBuilder
 		.addStanzaMagica(nomeStanzaMagica, sogliaMagica)
