@@ -3,11 +3,11 @@ package it.uniroma3.diadia.comandi;
 public class FabbricaDiComandiFisarmonica implements FabbricaDiComandi{
 	
 	@Override
-	public Comando costruisciComando(String istruzione) {
+	public AbstractComando costruisciComando(String istruzione) {
         String[] istruzioni;
 		istruzione = istruzione.toLowerCase();
 		istruzioni = istruzione.split("[\\W]+");
-        Comando comando = null;
+		AbstractComando comando = null;
         String nomeComando="";
         String Parametro=null; 
         if(istruzioni.length>0)

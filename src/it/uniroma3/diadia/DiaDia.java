@@ -51,7 +51,7 @@ public class DiaDia {
 	public void gioca() {
 		String istruzione;
 		this.console.mostraMessaggio(MESSAGGIO_BENVENUTO);
-		Comando comandoCostruito;
+		AbstractComando comandoCostruito;
 		do {
 			istruzione = this.console.leggiRiga();
 			comandoCostruito=Fabbrica.costruisciComando(istruzione);
@@ -70,7 +70,7 @@ public class DiaDia {
 	 * @param istruzione da eseguire, console di gioco
 	 * @return true solo se partita è vinta o finita, false altrimenti
 	 */
-	private boolean processaIstruzione (Comando comandoCostruito, IOConsole console) {
+	private boolean processaIstruzione (AbstractComando comandoCostruito, IOConsole console) {
 		String stampa = comandoCostruito.esegui(this.partita);
 		String Parametro;
 

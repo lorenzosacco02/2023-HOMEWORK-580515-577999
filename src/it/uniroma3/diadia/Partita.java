@@ -20,7 +20,6 @@ public class Partita {
 	private boolean finita;
 	private Labirinto Lab;
 	private Giocatore Player;
-
 	/**
 	 * Crea una partita a cui associa un labirinto e un giocatore
 	 */

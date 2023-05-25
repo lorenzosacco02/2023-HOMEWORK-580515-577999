@@ -2,11 +2,12 @@ package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
 
-public class ComandoInfo implements Comando {
-	String Parametro;
+public class ComandoInfo extends AbstractComando {
+	
 	public ComandoInfo() {
-		this.Parametro=null;
+		this.parametro=null;
 	}
+	
 	@Override
 	public String esegui(Partita partita) {
 		StringBuilder string = new StringBuilder("");
@@ -33,7 +34,7 @@ public class ComandoInfo implements Comando {
 
 	@Override
 	public void setParametro(String parametro) {
-		this.Parametro=parametro;
+		this.parametro=parametro;
 
 	}
 
@@ -41,10 +42,4 @@ public class ComandoInfo implements Comando {
 	public String getNome() {
 		return "ComandoInfo";
 	}
-
-	@Override
-	public String getParametro() {
-		return this.Parametro;
-	}
-
 }

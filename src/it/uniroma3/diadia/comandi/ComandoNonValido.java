@@ -2,14 +2,9 @@ package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
 
-public class ComandoNonValido implements Comando{
+public class ComandoNonValido extends AbstractComando{
 	
 	public ComandoNonValido(){
-		
-	}
-	
-	@Override
-	public void setParametro(String Parametro) {
 	}
 	
 	@Override
@@ -21,10 +16,5 @@ public class ComandoNonValido implements Comando{
 	@Override
 	public String getNome() {
 		return "ComandoNonValido";
-	}
-	
-	@Override
-	public String getParametro() {
-		return null;
 	}
 }

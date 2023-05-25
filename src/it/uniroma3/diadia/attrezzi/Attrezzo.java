@@ -79,9 +79,10 @@ public class Attrezzo implements Comparable<Attrezzo>{
 		Attrezzo that=(Attrezzo)o;
 		return this.getNome().toLowerCase().equals(that.getNome().toLowerCase());
 	}
+	
 	@Override
 	public int hashCode() {
-		return this.peso+this.getNome().hashCode();
+		return this.getNome().hashCode();
 	}
 	
 	@Override

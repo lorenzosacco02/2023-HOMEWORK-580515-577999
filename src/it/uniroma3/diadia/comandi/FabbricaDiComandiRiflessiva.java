@@ -5,14 +5,14 @@ import java.lang.reflect.InvocationTargetException;
 public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 
 	@Override
-	public Comando costruisciComando(String istruzione){
+	public AbstractComando costruisciComando(String istruzione){
 		String[] istruzioni;
 		istruzione = istruzione.toLowerCase();
 		istruzioni = istruzione.split("[\\W]+");
 		StringBuilder base = new StringBuilder("it.uniroma3.diadia.comandi.Comando");
 		String nomeComando="";
 		String Parametro=null;
-		Comando comando = null;
+		AbstractComando comando = null;
 		if(istruzioni.length>0) {
 			nomeComando=istruzioni[0];
 		}
@@ -23,7 +23,7 @@ public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 			
 			base.append(Character.toUpperCase(nomeComando.charAt(0)));
 			base.append(nomeComando.substring(1));
-			comando = (Comando)Class.forName(base.toString()).getDeclaredConstructor().newInstance();
+			comando = (AbstractComando)Class.forName(base.toString()).getDeclaredConstructor().newInstance();
 			comando.setParametro(Parametro);
 		}
 		catch (InstantiationException|IllegalAccessException| NoSuchMethodException e) {

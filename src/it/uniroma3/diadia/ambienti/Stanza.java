@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 import it.uniroma3.diadia.attrezzi.*;
+import it.uniroma3.diadia.personaggi.Personaggio;
 
 /**
  * Una stanza in un gioco di ruolo. Una stanza e' un luogo fisico nel gioco. E'
@@ -22,7 +23,7 @@ public class Stanza {
 	private String nome;
 	private List<Attrezzo> attrezzi;
 	private Map<String,Stanza> StanzeAdiacenti;
-
+	private Personaggio personaggio;
 	/**
 	 * Crea una stanza. Non ci sono stanze adiacenti, non ci sono attrezzi.
 	 * 
@@ -32,8 +33,9 @@ public class Stanza {
 		this.nome = nome;
 		this.StanzeAdiacenti = new HashMap<String,Stanza>();
 		this.attrezzi = new LinkedList<Attrezzo>();
+		this.personaggio=null;
 	}
-
+	
 	/**
 	 * Imposta una stanza adiacente.
 	 * 
@@ -192,5 +194,25 @@ public class Stanza {
 	public Map<String,Stanza> getMapStanzeAdiacenti(){
 		return this.StanzeAdiacenti;
 	}
-
+	
+	public Personaggio getPersonaggio() {
+		return this.personaggio;
+	}
+	
+	public void setPersonaggio(Personaggio p) {
+		this.personaggio = p;
+	}
+	
+	public void addPersonaggio(String tipo) {
+		StringBuilder base = new StringBuilder("it.uniroma3.diadia.personaggi.");
+		tipo.toLowerCase();
+		base.append(Character.toUpperCase(tipo.charAt(0)));
+		base.append(tipo.substring(1));
+		try {
+			this.personaggio = (Personaggio)Class.forName(base.toString()).getDeclaredConstructor().newInstance();
+		}
+		catch(Exception e){
+			System.out.println("Qualcosa è andato storto");
+		}
+	}
 }

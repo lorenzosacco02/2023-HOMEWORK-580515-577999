@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 class FabbricaDiComandiMapTest {
 	private FabbricaDiComandiMap Factory;
-	private Comando command;
+	private AbstractComando command;
 	@BeforeEach
 	void setup() {
 		Factory= new FabbricaDiComandiMap();

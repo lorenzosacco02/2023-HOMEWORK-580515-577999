@@ -7,12 +7,12 @@ import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
-import it.uniroma3.diadia.comandi.Comando;
+import it.uniroma3.diadia.comandi.AbstractComando;
 import it.uniroma3.diadia.comandi.FabbricaDiComandi;
 import it.uniroma3.diadia.comandi.FabbricaDiComandiMap;
 
 class ComandoTest {
-	private Comando comando;
+	private AbstractComando comando;
 	private Partita partita;
 	private Stanza StanzaConNome;
 	private FabbricaDiComandi Fabbrica;

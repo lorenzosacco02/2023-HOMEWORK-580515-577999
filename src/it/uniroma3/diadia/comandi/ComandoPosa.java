@@ -1,23 +1,22 @@
 package it.uniroma3.diadia.comandi;
 import it.uniroma3.diadia.*;
 
-public class ComandoPosa implements Comando{
-	private String Oggetto;
+public class ComandoPosa extends AbstractComando{
 
 	public ComandoPosa(){
-		this.Oggetto = null;
+		this.parametro = null;
 	}
 
 	@Override
 	public void setParametro(String parametro) {
-		this.Oggetto=parametro;
+		this.parametro=parametro;
 	}
 
 	@Override
 	public String esegui(Partita partita){
 		StringBuilder output=new StringBuilder("");
-		output.append(partita.getPlayer().RemoveAttrezzo( this.Oggetto , partita.getStanzaCorrente()));
-		Boolean Bool = output.toString().equals("Ho toccato il fondo, ma "+Oggetto+" non l'ho trovato");
+		output.append(partita.getPlayer().RemoveAttrezzo( this.getParametro() , partita.getStanzaCorrente()));
+		Boolean Bool = output.toString().equals("Ho toccato il fondo, ma "+this.getParametro()+" non l'ho trovato");
 		Boolean Bool2 =output.toString().equals("C'è già troppo disordine in questa stanza!\nNon vorrei crearne altro");
 		Boolean Bool3 = output.toString().equals("Che attrezzo vuoi posare?");
 		Boolean Bool4 = output.toString().equals("Stanza innesistente");
@@ -36,6 +35,6 @@ public class ComandoPosa implements Comando{
 	
 	@Override
 	public String getParametro() {
-		return this.Oggetto;
+		return this.parametro;
 	}
 }

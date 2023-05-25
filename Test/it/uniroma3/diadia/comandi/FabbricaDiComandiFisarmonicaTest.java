@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 class FabbricaDiComandiFisarmonicaTest {
 	private FabbricaDiComandiFisarmonica Factory;
-	private Comando command;
+	private AbstractComando command;
 	@BeforeEach
 	void setup() {
 		Factory= new FabbricaDiComandiFisarmonica();

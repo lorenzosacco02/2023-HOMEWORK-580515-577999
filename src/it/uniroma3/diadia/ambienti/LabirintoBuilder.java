@@ -20,6 +20,13 @@ public class LabirintoBuilder {
 		this.MappaStanze.get(this.ultimaAggiunta).addAttrezzo(new Attrezzo(NomeAttrezzo,peso));
 		return this;
 	}
+	
+	public LabirintoBuilder addPersonaggio(String tipo, String nome, String presentazione, String attr, String regalo,int peso1,int peso2){
+		this.MappaStanze.get(this.ultimaAggiunta).addPersonaggio(tipo);
+		this.MappaStanze.get(this.ultimaAggiunta).getPersonaggio().setter(nome, presentazione, new Attrezzo(attr, peso1), new Attrezzo(regalo, peso2));
+		return this;
+	}
+	
 
 	public LabirintoBuilder addStanzaIniziale(String NomeIngresso){
 		this.ingresso=NomeIngresso;
@@ -111,10 +118,6 @@ public class LabirintoBuilder {
 			return null;
 		}
 	}
-
-	/*public List<String> getMappaStanze() {
-		return this.MappaStanze.keySet().stream().toList();
-	}*/
 
 	public Map<String, Stanza> getMappaStanze() {
 		return MappaStanze;

@@ -10,8 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ComandoInfoTest {
-private Comando comando;
-private Comando comandoStanza;
+private AbstractComando comando;
+private AbstractComando comandoStanza;
 private Stanza StanzaNormale;
 private StanzaBloccata StanzaBloccata;
 private StanzaBuia StanzaBuia;

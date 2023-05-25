@@ -4,17 +4,15 @@ import java.util.Set;
 
 import it.uniroma3.diadia.*;
 
-public class ComandoAiuto implements Comando{
+public class ComandoAiuto extends AbstractComando{
 
 	private Set<String> elencoComandi;
-	private String parametro;
 
 
 	public ComandoAiuto(){
 		this.elencoComandi=new HashSet<String>();
-		parametro = null;
+		this.parametro = null;
 	}
-
 	@Override
 	public void setParametro(String parametro) {
 		this.parametro=parametro;
@@ -25,7 +23,7 @@ public class ComandoAiuto implements Comando{
 		StringBuilder string = new StringBuilder("");
 		if(this.parametro==null)
 			this.setParametro("");
-		switch (this.parametro) {
+		switch (this.getParametro()) {
 		case "aiuto":
 			string.append("Il comando aiuto ti da informazioni su tutti i comandi del gioco\nsi scriva aiuto e una di queste opzioni ");
 		case "":

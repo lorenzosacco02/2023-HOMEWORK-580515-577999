@@ -2,21 +2,20 @@ package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
 
-public class ComandoPrendi implements Comando{
-	private String Oggetto;
+public class ComandoPrendi extends AbstractComando{
 	public ComandoPrendi(){
-		Oggetto = null;
+		this.parametro = null;
 	}
 	
 	@Override
 	public void setParametro(String parametro) {
-		this.Oggetto=parametro;
+		this.parametro=parametro;
 	}
 	
 	@Override
 	public String esegui(Partita partita){
 		StringBuilder output= new StringBuilder("");
-		output.append(partita.getPlayer().PrendiAttrezzo(this.Oggetto, partita.getStanzaCorrente()));
+		output.append(partita.getPlayer().PrendiAttrezzo(this.getParametro(), partita.getStanzaCorrente()));
 		Boolean Bool = output.toString().equals("Il tuo attrezzo non esiste");
 		Boolean Bool2 =output.toString().equals("La tua borsa è troppo pesante prova a lasciare qualche attrezzo a terra");
 		Boolean Bool3 = output.toString().equals("Che attrezzo vuoi prendere?");
@@ -36,6 +35,6 @@ public class ComandoPrendi implements Comando{
 	
 	@Override
 	public String getParametro() {
-		return this.Oggetto;
+		return this.parametro;
 	}
 }

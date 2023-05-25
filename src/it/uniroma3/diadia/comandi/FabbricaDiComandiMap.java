@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class FabbricaDiComandiMap implements FabbricaDiComandi {
 	
-	private HashMap<String,Comando> Comandi;
+	private HashMap<String,AbstractComando> Comandi;
 	public FabbricaDiComandiMap() {
 		this.Comandi= new HashMap<>();
 		Comandi.put("comandononvalido", new ComandoNonValido());
@@ -19,7 +19,7 @@ public class FabbricaDiComandiMap implements FabbricaDiComandi {
 	}
 	
 	@Override
-	public Comando costruisciComando(String istruzione) {
+	public AbstractComando costruisciComando(String istruzione) {
 		String[] istruzioni;
 		istruzione = istruzione.toLowerCase();
 		istruzioni = istruzione.split("[\\W]+");
