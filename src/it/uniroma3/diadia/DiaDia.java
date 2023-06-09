@@ -1,5 +1,7 @@
 package it.uniroma3.diadia;
-import it.uniroma3.diadia.comandi.*;
+import it.uniroma3.diadia.comandi.AbstractComando;
+import it.uniroma3.diadia.comandi.FabbricaDiComandi;
+import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
  * Per giocare crea un'istanza di questa classe e invoca il metodo gioca
@@ -37,7 +39,7 @@ public class DiaDia {
 	 * Inizializza una nuova Partita e una Console
 	 */
 	public DiaDia(IO io) {
-		this.partita = new Partita();
+		this.partita = new Partita("prova");
 		this.console = (IOConsole) io;
 		this.Fabbrica= new FabbricaDiComandiRiflessiva();
 	}

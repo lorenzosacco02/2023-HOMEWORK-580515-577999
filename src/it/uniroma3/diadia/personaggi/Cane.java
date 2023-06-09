@@ -14,6 +14,7 @@ public class Cane extends Personaggio{
 	public Cane(){
 		this(NOME_CANE_DEFAULT, CIBO_PREFERITO_DEFAULT, PRESENTAZIONE_CANE_DEFAULT, ATTREZZO_DA_DONARE_DEFAULT);
 	}
+	
 	public Cane(String nome) {
 		this(nome, CIBO_PREFERITO_DEFAULT, PRESENTAZIONE_CANE_DEFAULT, ATTREZZO_DA_DONARE_DEFAULT);
 	}
@@ -25,19 +26,31 @@ public class Cane extends Personaggio{
 	public Cane(String nome, Attrezzo cibo, String presentaz) {
 		this(nome, cibo, presentaz, ATTREZZO_DA_DONARE_DEFAULT);
 	}
+	
     public Cane(String nome, Attrezzo cibo, String presentaz,Attrezzo attrezzo) {
 		super(nome, presentaz);
 		this.ciboPreferito=cibo;
         this.AttrezzoDaDonare=attrezzo;
 	}
+    
+	public Attrezzo getAttrezzoDaDonare(){
+		return this.AttrezzoDaDonare;
+	}
+	
+	public Attrezzo getCiboPreferito(){
+		return this.ciboPreferito;
+	}
+	
 	public void setRegalo(Attrezzo Regalo){
 		if(Regalo!=null)
 		this.AttrezzoDaDonare=Regalo;
 	}
+	
 	public void setCiboPreferito(Attrezzo Cibo){
 		if(Cibo!=null)
 		this.ciboPreferito=Cibo;
 	}
+	
 	@Override
 	public String agisci(Partita partita) {
 		if(partita!=null && partita.getPlayer()!=null) {
@@ -49,13 +62,13 @@ public class Cane extends Personaggio{
 
 	@Override
 	public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
+		if(attrezzo!=null && partita!=null && partita.getStanzaCorrente()!=null){
 		if(attrezzo.equals(this.ciboPreferito)){
-            if(partita!=null && partita.getStanzaCorrente()!=null) {
             	partita.getStanzaCorrente().addAttrezzo(AttrezzoDaDonare);
             	return "WOOOOOOF";
-            }
 		}else{
           return this.agisci(partita);
+        }
         }
 		return "Qualcosa è andato storto in cane";
 	}

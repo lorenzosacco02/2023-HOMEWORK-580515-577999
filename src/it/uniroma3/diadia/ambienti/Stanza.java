@@ -1,11 +1,11 @@
 package it.uniroma3.diadia.ambienti;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
-import it.uniroma3.diadia.attrezzi.*;
+import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.personaggi.Personaggio;
 
 /**
@@ -44,7 +44,7 @@ public class Stanza {
 	 *                  parametro.
 	 */
 	public void impostaStanzaAdiacente(String direzione, Stanza stanza) {
-		if(direzione=="nord"||direzione=="sud"||direzione=="est"||direzione=="ovest") {
+		if(direzione.equals("nord")||direzione.equals("sud")||direzione.equals("est")||direzione.equals("ovest")){
 			if (StanzeAdiacenti.containsKey(direzione)==true){
 				if(StanzeAdiacenti.get(direzione)!=null) {
 					StanzeAdiacenti.put(direzione, stanza);
@@ -187,7 +187,7 @@ public class Stanza {
 	 * @return direzioni della stanza valide
 	 */
 	public List<String> getDirezioni() {
-		List<String> copia = new LinkedList<String>(StanzeAdiacenti.keySet());
+		LinkedList<String> copia = new LinkedList<String>(StanzeAdiacenti.keySet());
 		return copia;
 	}
 	

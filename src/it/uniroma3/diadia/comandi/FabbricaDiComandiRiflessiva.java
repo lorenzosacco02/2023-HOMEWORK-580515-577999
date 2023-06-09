@@ -23,15 +23,15 @@ public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 			
 			base.append(Character.toUpperCase(nomeComando.charAt(0)));
 			base.append(nomeComando.substring(1));
-			comando = (AbstractComando)Class.forName(base.toString()).getDeclaredConstructor().newInstance();
+			comando = (AbstractComando)Class.forName(base.toString()).newInstance();
 			comando.setParametro(Parametro);
 		}
-		catch (InstantiationException|IllegalAccessException| NoSuchMethodException e) {
+		catch (InstantiationException|IllegalAccessException e) {
 			System.out.println("CONTROLLA CHE ESISTA UN COSTRUTTORE NO-ARGS IN TUTTE LE CLASSI DI COMANDO E CHE SIA PUBLIC");
 			}
-		catch (InvocationTargetException e) {
+		/*catch (InvocationTargetException e) {
 			System.out.println("CONTROLLA LE ECCEZIONI SOLLEVATE DAI COSTRUTTORI");
-			}
+			}*/
 		catch(Exception e){
 			comando= new ComandoNonValido();
 		}

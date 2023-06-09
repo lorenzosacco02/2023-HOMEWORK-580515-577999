@@ -1,9 +1,9 @@
 package it.uniroma3.diadia.giocatore;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
@@ -47,7 +47,7 @@ public class Borsa{
 	 */
 	public Borsa(int pesoMax) {
 		this.pesoMax = pesoMax;
-		this.attrezzi = new LinkedList<Attrezzo>(); 
+		this.attrezzi = new ArrayList<Attrezzo>(); 
 	}
 
 	/**
@@ -122,7 +122,7 @@ public class Borsa{
 	 * @return List di attrezzi presenti nella borsa ordinati per peso
 	 */
 	public List<Attrezzo> getContenutoOrdinatoPerPeso(){
-		List<Attrezzo> attrezziOrdinati = new LinkedList<Attrezzo>(attrezzi);
+		List<Attrezzo> attrezziOrdinati = new ArrayList<Attrezzo>(attrezzi);
 		Collections.sort(attrezziOrdinati, new ComparatorPerPeso());
 		return attrezziOrdinati;
 	}

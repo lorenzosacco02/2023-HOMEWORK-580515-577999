@@ -34,11 +34,11 @@ public class Strega extends Personaggio{
 		if(listaStanze.size()!=0) {
 			Collections.sort(listaStanze,cmp);
 			if(this.haSalutato()){
-				partita.setStanzaCorrente(listaStanze.getFirst());	
+				partita.setStanzaCorrente(listaStanze.getLast());	
 				return "Sei stato bravo ora divertiti ti ho trasportato in un posto pieno di attrezzi";
 			}
 			else {
-				partita.setStanzaCorrente(listaStanze.getLast());
+				partita.setStanzaCorrente(listaStanze.getFirst());
 				return "Impara l'educazione e saluta la prossima volta! ora ti spedisco in una stanza desolata";
 			}
 		}
@@ -59,7 +59,7 @@ public class Strega extends Personaggio{
 				output.append("hi hi hi hi");
 			break;
 			case 2 : 
-				output.append("ma fammi il piacere cosa mi serve "+attrezzo.getNome());
+				output.append("ma fammi il piacere a cosa mi serve "+attrezzo.getNome());
 			break;
 			case 3 : 
 				output.append("non sono tanto idiota come il mago");

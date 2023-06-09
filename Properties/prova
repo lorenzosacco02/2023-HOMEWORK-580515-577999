@@ -1,0 +1,5 @@
+Stanze:biblioteca,Atrio,Casa
+Inizio:Atrio
+Vincente:Casa
+Attrezzi:martello 10 biblioteca, pinza 2 Atrio
+Uscite:Atrio sud biblioteca,biblioteca nord Atrio,biblioteca sud Casa

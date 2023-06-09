@@ -1,6 +1,9 @@
 package it.uniroma3.diadia;
 
 import it.uniroma3.diadia.giocatore.*;
+
+import java.io.FileNotFoundException;
+
 import it.uniroma3.diadia.ambienti.*;
 
 /**
@@ -15,21 +18,48 @@ import it.uniroma3.diadia.ambienti.*;
  */
 
 public class Partita {
-	
+
 	private Stanza stanzaCorrente;
 	private boolean finita;
 	private Labirinto Lab;
 	private Giocatore Player;
+	private CaricatoreLabirinto fileLab;
+	private static final String FILE_NAME = "Lab_DiaDia";
 	/**
 	 * Crea una partita a cui associa un labirinto e un giocatore
 	 */
+	
 	public Partita(){
-		Lab= new Labirinto();
+		this(FILE_NAME);
+	}
+	
+	public Partita(String File){
+		Lab=LabirintoCharger(File);
 		stanzaCorrente = this.Lab.getEntrata();
 		this.finita = false;
 		Player=new Giocatore();
 	}
-
+	
+	private Labirinto LabirintoCharger(String File) {
+		if(File.equals(FILE_NAME)){
+			return new Labirinto();
+		}
+		try {
+			fileLab = new CaricatoreLabirinto(File);
+			fileLab.carica();
+			Lab=fileLab.getLabirinto();
+			return Lab;
+		}
+		catch (FileNotFoundException e) {
+			System.out.println("controlla che nel tuo pc esista un file chiamato: "+File+"\nVerrà eseguita una partita standard\n");
+			return new Labirinto();
+		}
+		catch (FormatoFileNonValidoException e) {
+			System.out.println("PROBLEMI CON IL CARICAMENTO DEL FILE\n"+e.getMessage());
+			return new Labirinto();
+		}
+	}
+	
 	/**
 	 * Restituisce la stanza vincente
 	 * @return stanza di uscita dal labirinto
@@ -37,7 +67,7 @@ public class Partita {
 	public Stanza getUscita() {
 		return this.Lab.getUscita();
 	}
-
+	
 	/**
 	 * imposta la stanza in cui ci troviamo dopo ogni spostamento
 	 * @param stanzaCorrente
@@ -87,7 +117,7 @@ public class Partita {
 	public Giocatore getPlayer(){
 		return this.Player;
 	}
-	
+
 	public void setPlayer(Giocatore Player) {
 		this.Player=Player;
 	}

@@ -1,9 +1,10 @@
 package it.uniroma3.diadia.ambienti;
-import it.uniroma3.diadia.attrezzi.*;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+
+import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 /**
  * Una stanza in un gioco di ruolo.

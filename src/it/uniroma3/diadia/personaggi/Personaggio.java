@@ -16,6 +16,9 @@ public abstract class Personaggio {
 	public String getNome() {
 		return this.nome;
 	}
+	public String getPresentazione() {
+		return this.presentazione;
+	}
 	
 	public void setNome(String nome) {
 		if(nome!=null)
@@ -26,7 +29,7 @@ public abstract class Personaggio {
 		if(pres!=null)
 		this.presentazione=pres;
 	}
-
+	
 	public boolean haSalutato() {
 		return this.haSalutato;
 	}
@@ -35,10 +38,10 @@ public abstract class Personaggio {
 
 				new StringBuilder("Ciao, io sono ");
 
-		risposta.append(this.getNome()+".");
+		risposta.append(this.getNome()+"\n");
 		if (!haSalutato)
 
-			risposta.append(this.presentazione);
+			risposta.append(this.getPresentazione());
 
 		else
 

@@ -49,6 +49,7 @@ public class Mago extends Personaggio{
 		}
 		return "Mi stai prendendo in giro, non è divertente";
 	}
+	
 	@Override
 	public void setter(String nome, String presentazione, Attrezzo attrezzo, Attrezzo preferito) {
 		this.setNome(nome);
