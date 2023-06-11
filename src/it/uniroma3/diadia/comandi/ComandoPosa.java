@@ -22,7 +22,7 @@ public class ComandoPosa extends AbstractComando{
 		Boolean Bool4 = output.toString().equals("Stanza innesistente");
 		if((Bool||Bool2||Bool3||Bool4)==false)  {
 			partita.getPlayer().setCfu(partita.getPlayer().getCfu()-1);
-			return output.append("\nCFU rimasti: "+ partita.getPlayer().getCfu()).toString();
+			return output.append("\n"+ partita.getPlayer().getDescrizione()).toString();
 		}
 		else 
 			return output.toString();

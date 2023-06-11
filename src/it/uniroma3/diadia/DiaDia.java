@@ -13,7 +13,7 @@ import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
  */
 
 public class DiaDia {
-
+	public final static String LABIRINTO_DEF=Configuratore.getLabirinto();
 	public static void main(String[] argc) {
 		IO io = new IOConsole();
 		DiaDia gioco = new DiaDia(io);
@@ -39,7 +39,7 @@ public class DiaDia {
 	 * Inizializza una nuova Partita e una Console
 	 */
 	public DiaDia(IO io) {
-		this.partita = new Partita("prova");
+		this.partita = new Partita(LABIRINTO_DEF);
 		this.console = (IOConsole) io;
 		this.Fabbrica= new FabbricaDiComandiRiflessiva();
 	}

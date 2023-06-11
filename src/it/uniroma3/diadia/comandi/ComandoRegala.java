@@ -7,7 +7,7 @@ public class ComandoRegala extends AbstractComando{
 	public String esegui(Partita partita) {
 		return partita.getStanzaCorrente().getPersonaggio().riceviRegalo(partita.getPlayer().getBorsa().getAttrezzo(this.getParametro()), partita);
 	}
-
+	
 	@Override
 	public String getNome() {
 		return "ComandoRegala";

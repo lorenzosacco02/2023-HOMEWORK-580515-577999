@@ -26,7 +26,7 @@ public class ComandoVai extends AbstractComando{
 			else {
 				partita.setStanzaCorrente(prossimaStanza);
 				partita.getPlayer().setCfu(partita.getPlayer().getCfu()-1);
-				string.append("CFU rimasti: "+partita.getPlayer().getCfu()+"\n");
+				string.append(partita.getPlayer().getDescrizione()+"\n");
 			}
 		}
 		return string.append(partita.getStanzaCorrente().getDescrizione()).toString();

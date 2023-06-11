@@ -23,6 +23,9 @@ public class ComandoInfo extends AbstractComando {
 		case "stanza":
 			string.append(partita.getStanzaCorrente().getDescrizione());
 			break;
+		case "giocatore":
+			string.append(partita.getPlayer().getDescrizione());
+			break;
 		default:
 			string.append("Non esiste alcuna info su: ");
 			string.append(this.getParametro());

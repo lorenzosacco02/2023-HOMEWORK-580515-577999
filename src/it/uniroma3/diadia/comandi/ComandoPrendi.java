@@ -24,7 +24,7 @@ public class ComandoPrendi extends AbstractComando{
 		}
 		else {
 			partita.getPlayer().setCfu(partita.getPlayer().getCfu()-1);
-			return output.append("\nCFU rimasti: "+ partita.getPlayer().getCfu()).toString();
+			return output.append("\n"+partita.getPlayer().getDescrizione()).toString();
 		}
 	}
 	

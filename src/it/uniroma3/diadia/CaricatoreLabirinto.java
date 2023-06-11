@@ -3,9 +3,17 @@ package it.uniroma3.diadia;
 import java.io.*;
 import java.util.*;
 
+import it.uniroma3.diadia.ambienti.Direzioni;
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.ambienti.StanzaBloccata;
+import it.uniroma3.diadia.ambienti.StanzaBuia;
+import it.uniroma3.diadia.ambienti.StanzaMagica;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.personaggi.Cane;
+import it.uniroma3.diadia.personaggi.Mago;
+import it.uniroma3.diadia.personaggi.Personaggio;
+import it.uniroma3.diadia.personaggi.Strega;
 
 public class CaricatoreLabirinto {
 
@@ -23,6 +31,24 @@ public class CaricatoreLabirinto {
 
 	/* prefisso della riga contenente le specifiche dei collegamenti tra stanza nel formato <nomeStanzaDa> <direzione> <nomeStanzaA> */
 	private static final String USCITE_MARKER = "Uscite:";
+
+	/* prefisso della riga contenente il nome stanza buia */
+	private static final String STANZE_BUIE_MARKER = "Buia:";  
+
+	/* prefisso della riga contenente il nome stanza bloccata */
+	private static final String STANZE_BLOCCATE_MARKER = "Bloccata:";  
+	
+	/* prefisso della riga contenente il nome stanza bloccata */
+	private static final String STANZE_MAGICHE_MARKER = "Magica:";  
+	
+	/* prefisso della riga contenente le specifiche degli attrezzi da collocare nel formato <nomeMago> <presentazione> <attrezzo> */
+	private static final String PERSONAGGI_MARKER_MAGO = "Mago:";
+	
+	/* prefisso della riga contenente le specifiche degli attrezzi da collocare nel formato <nomeStrega> <presentazione> */
+	private static final String PERSONAGGI_MARKER_STREGA = "Strega:";
+	
+	/* prefisso della riga contenente le specifiche degli attrezzi da collocare nel formato <nomeCane> <presentazione> */
+	private static final String PERSONAGGI_MARKER_CANE = "Cane:";
 
 	/*
 	 *  Esempio di un possibile file di specifica di un labirinto (vedi POO-26-eccezioni-file.pdf)
@@ -43,15 +69,21 @@ public class CaricatoreLabirinto {
 
 
 	public CaricatoreLabirinto(String nomeFile) throws FileNotFoundException {
-		String path = this.getClass().getClassLoader().getResource(nomeFile).getPath();
+		//String path = this.getClass().getClassLoader().getResource(nomeFile).getPath();
 		this.nome2stanza = new HashMap<String,Stanza>();
-		this.reader = new LineNumberReader(new FileReader(path));
+		this.reader = new LineNumberReader(new FileReader(nomeFile));
 	}
 
 	public void carica() throws FormatoFileNonValidoException {
 		try {
 			this.leggiECreaStanze();
+			this.leggiECreaStanzeMagiche();
+			this.leggiECreaStanzeBuie();
+			this.leggiECreaStanzeBloccate();
 			this.leggiInizialeEvincente();
+			this.leggiECreaMaghi();
+			this.leggiECreaCani();
+			this.leggiECreaStreghe();
 			this.leggiECollocaAttrezzi();
 			this.leggiEImpostaUscite();
 		} finally {
@@ -62,6 +94,7 @@ public class CaricatoreLabirinto {
 				throw new RuntimeException(e);
 			}
 		}
+
 	}
 
 	private String leggiRigaCheCominciaPer(String marker) throws FormatoFileNonValidoException {
@@ -189,5 +222,124 @@ public class CaricatoreLabirinto {
 		
 		Labirinto LabirintoCostruito = new Labirinto(this.getStanzaIniziale(),this.getStanzaVincente());
 		return LabirintoCostruito;
+	}
+	
+
+	
+	private void leggiECreaStanzeMagiche() throws FormatoFileNonValidoException  {
+		String nomiStanze = this.leggiRigaCheCominciaPer(STANZE_MAGICHE_MARKER);
+		for(String nomeStanza : separaStringheAlleVirgole(nomiStanze)) {
+			Stanza stanza = new StanzaMagica(nomeStanza);
+			this.nome2stanza.put(nomeStanza, stanza);
+		}
+	}
+	
+
+	private void leggiECreaStanzeBuie() throws FormatoFileNonValidoException {
+		String specificheStanze = this.leggiRigaCheCominciaPer(STANZE_BUIE_MARKER);
+		for(String specifica : separaStringheAlleVirgole(specificheStanze)) {
+			
+			try (Scanner scannerDiLinea = new Scanner(specifica)) 	{	
+				while (scannerDiLinea.hasNext()) {
+					
+					check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("la  stanza "+ specifica+" non esiste\n"));
+					String nomeStanza = scannerDiLinea.next();
+					check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("vi è stato qualche problema nella creazione dell'attrezzo per vedere la stanza "+specifica+"\n"));
+					String attrezzoPerVedere = scannerDiLinea.next();
+
+					Stanza stanza = new StanzaBuia(nomeStanza, attrezzoPerVedere);
+					this.nome2stanza.put(nomeStanza, stanza);
+				}
+			}
+		} 
+
+	}
+	
+
+	
+	private void leggiECreaStanzeBloccate() throws FormatoFileNonValidoException {
+		String specificheStanze = this.leggiRigaCheCominciaPer(STANZE_BLOCCATE_MARKER);
+		for(String specifica : separaStringheAlleVirgole(specificheStanze)) {
+			
+			try (Scanner scannerDiLinea = new Scanner(specifica)) 	{	
+				while (scannerDiLinea.hasNext()) {
+					
+					check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("la  stanza "+ specifica+" non esiste\n"));
+					String nomeStanza = scannerDiLinea.next();
+					check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("la  direzione della stanza"+ specifica+" non esiste\n"));
+					Direzioni direzione = Direzioni.valueOf(scannerDiLinea.next());
+					check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("vi è stato qualche problema nella creazione dell'attrezzo per sbloccare la stanza "+specifica+"\n"));
+					String attrezzoSbloccante = scannerDiLinea.next();
+
+					Stanza stanza = new StanzaBloccata(nomeStanza, direzione.toString(), attrezzoSbloccante);
+					this.nome2stanza.put(nomeStanza, stanza);
+				}
+			}
+		} 
+	}
+	
+	private void leggiECreaMaghi() throws FormatoFileNonValidoException {
+		String specificheStanze = this.leggiRigaCheCominciaPer(PERSONAGGI_MARKER_MAGO);
+		for(String specifica : separaStringheAlleVirgole(specificheStanze)) {
+			
+			try (Scanner scannerDiLinea = new Scanner(specifica)) 	{	
+				while (scannerDiLinea.hasNext()) {
+					
+					check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("la  stanza "+ specifica+"per aggiungere il mago non esiste\n"));
+					String nomeStanza = scannerDiLinea.next();
+					check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("problemini nella creazione del mago ...\n"));
+					String mago = scannerDiLinea.next();
+					check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("specifica la presentazione del mago\n"));
+					String presentazione = scannerDiLinea.next();					
+					check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("vi è stato qualche problema nella creazione dell'attrezzo per il mago della stanza "+specifica+"\n"));
+					String attrezzo = scannerDiLinea.next();
+
+					Personaggio personaggio = new Mago(mago, new Attrezzo(attrezzo, 4), presentazione);
+					this.nome2stanza.get(nomeStanza).setPersonaggio(personaggio);
+				}
+			}
+		} 
+	}
+	
+	private void leggiECreaStreghe() throws FormatoFileNonValidoException {
+		String specificheStanze = this.leggiRigaCheCominciaPer(PERSONAGGI_MARKER_STREGA);
+		for(String specifica : separaStringheAlleVirgole(specificheStanze)) {
+			
+			try (Scanner scannerDiLinea = new Scanner(specifica)) 	{	
+				while (scannerDiLinea.hasNext()) {
+					
+					check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("la  stanza "+ specifica+"per aggiungere la strega non esiste\n"));
+					String nomeStanza = scannerDiLinea.next();
+					check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("problemini nella creazione della strega ...\n"));
+					String strega = scannerDiLinea.next();
+					check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("specifica la presentazione della strega\n"));
+					String presentazione = scannerDiLinea.next();					
+					Personaggio personaggio = new Strega(strega, presentazione);
+					this.nome2stanza.get(nomeStanza).setPersonaggio(personaggio);
+				}
+			}
+		} 
+	}
+	
+	private void leggiECreaCani() throws FormatoFileNonValidoException {
+		String specificheStanze = this.leggiRigaCheCominciaPer(PERSONAGGI_MARKER_CANE);
+		for(String specifica : separaStringheAlleVirgole(specificheStanze)) {
+			
+			try (Scanner scannerDiLinea = new Scanner(specifica)) 	{	
+				while (scannerDiLinea.hasNext()) {
+					
+					check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("la  stanza "+ specifica+"per aggiungere il cane non esiste\n"));
+					String nomeStanza = scannerDiLinea.next();
+					check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("problemini nella creazione del cane ...\n"));
+					String cane = scannerDiLinea.next();
+					check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("specifica la presentazione del cane\n"));
+					String presentazione = scannerDiLinea.next();					
+
+
+					Personaggio personaggio = new Cane(cane, null, presentazione);
+					this.nome2stanza.get(nomeStanza).setPersonaggio(personaggio);
+				}
+			}
+		} 
 	}
 }

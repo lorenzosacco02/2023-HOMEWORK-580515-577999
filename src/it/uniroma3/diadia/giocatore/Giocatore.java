@@ -1,5 +1,6 @@
 package it.uniroma3.diadia.giocatore;
 
+import it.uniroma3.diadia.Configuratore;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.*;
 
@@ -15,7 +16,7 @@ import it.uniroma3.diadia.attrezzi.*;
  */
 
 public class Giocatore {
-	static final private int CFU_INIZIALI = 20;
+	static final private int CFU_INIZIALI = Configuratore.getCFU();
 	private int CFU;
 	private Borsa BorsaDelGiocatore;
 
@@ -25,7 +26,7 @@ public class Giocatore {
 	}
 
 	public Giocatore(Borsa borsa) {
-		CFU=20;
+		CFU=CFU_INIZIALI;
 		this.BorsaDelGiocatore = borsa;
 	}
 
@@ -81,4 +82,7 @@ public class Giocatore {
 	public Borsa getBorsa () {
 		return this.BorsaDelGiocatore;
 	}
+	 public String getDescrizione() {
+		 return "CFU rimasti: "+this.getCfu();
+	 }
 }

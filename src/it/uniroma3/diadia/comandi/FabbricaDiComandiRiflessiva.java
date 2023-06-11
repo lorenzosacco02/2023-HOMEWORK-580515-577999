@@ -1,6 +1,4 @@
 package it.uniroma3.diadia.comandi;
-import java.lang.Class;
-import java.lang.reflect.InvocationTargetException;
 
 public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 
@@ -23,7 +21,7 @@ public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 			
 			base.append(Character.toUpperCase(nomeComando.charAt(0)));
 			base.append(nomeComando.substring(1));
-			comando = (AbstractComando)Class.forName(base.toString()).newInstance();
+			comando = (AbstractComando)Class.forName(base.toString()).getDeclaredConstructor().newInstance();
 			comando.setParametro(Parametro);
 		}
 		catch (InstantiationException|IllegalAccessException e) {

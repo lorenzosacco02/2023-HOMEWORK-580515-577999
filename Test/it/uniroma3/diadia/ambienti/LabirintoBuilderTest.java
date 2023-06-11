@@ -1,6 +1,8 @@
 package it.uniroma3.diadia.ambienti;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -10,22 +12,21 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import it.uniroma3.diadia.ambienti.Labirinto.LabirintoBuilder;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 class LabirintoBuilderTest {
 	Labirinto monolocaleNostro;
 	Labirinto bilocaleNostro;
 	Labirinto trilocaleNostro;
-	private LabirintoBuilder labirintoBuilder;
+	private Labirinto.LabirintoBuilder labirintoBuilder;
 	private String nomeStanzaIniziale = "Atrio";
 	private String nomeStanzaVincente = "Uscita";
 	@BeforeEach
 	void setUp() throws Exception{
-		monolocaleNostro= new LabirintoBuilder().addStanzaIniziale("salotto").addAttrezzo("Banana",50).addStanzaVincente("salotto").getLabirinto();
-		bilocaleNostro= new LabirintoBuilder().addStanzaIniziale("salotto").addStanzaVincente("camera").addAttrezzo("letto",10).addAdiacenza("salotto", "camera", "nord").getLabirinto();
-		trilocaleNostro= new LabirintoBuilder().addStanza("salotto").addStanza("cucina").addAttrezzo("pentola",1).addStanzaVincente("camera").addAdiacenza("salotto", "cucina", "nord").addAdiacenza("cucina", "camera", "est").getLabirinto();
-		labirintoBuilder = new LabirintoBuilder();
+		monolocaleNostro= new Labirinto.LabirintoBuilder().addStanzaIniziale("salotto").addAttrezzo("Banana",50).addStanzaVincente("salotto").getLabirinto();
+		bilocaleNostro= new Labirinto.LabirintoBuilder().addStanzaIniziale("salotto").addStanzaVincente("camera").addAttrezzo("letto",10).addAdiacenza("salotto", "camera", "nord").getLabirinto();
+		trilocaleNostro= new Labirinto.LabirintoBuilder().addStanza("salotto").addStanza("cucina").addAttrezzo("pentola",1).addStanzaVincente("camera").addAdiacenza("salotto", "cucina", "nord").addAdiacenza("cucina", "camera", "est").getLabirinto();
+		labirintoBuilder = new Labirinto.LabirintoBuilder();
 	}
 
 	@Test
@@ -90,7 +91,6 @@ class LabirintoBuilderTest {
 				.addStanzaIniziale(nomeStanzaIniziale)
 				.addStanzaVincente(nomeStanzaVincente)
 				.addAdiacenza(nomeStanzaIniziale, nomeStanzaVincente, "nord")
-				.addAdiacenza(nomeStanzaVincente, nomeStanzaIniziale, "sud")
 				.getLabirinto();
 		assertEquals(bilocale.getUscita(),bilocale.getEntrata().getStanzaAdiacente("nord"));
 		assertEquals(Collections.singletonList("nord"),bilocale.getEntrata().getDirezioni());
@@ -127,6 +127,7 @@ class LabirintoBuilderTest {
 	
 	@Test
 	public void testPiuDiQuattroAdiacenti() {
+		try {
 		Labirinto maze = labirintoBuilder
 				.addStanzaIniziale(nomeStanzaIniziale)
 				.addStanza("stanza 1")
@@ -144,6 +145,10 @@ class LabirintoBuilderTest {
 		assertNull(maze.getEntrata().getStanzaAdiacente("nord-est"));
 		assertTrue(maze.getEntrata().getMapStanzeAdiacenti().size()<=4);
 		assertTrue(!maze.getEntrata().getMapStanzeAdiacenti().containsValue(test));
+		}
+		catch(Exception e) {
+			assertEquals("No enum constant it.uniroma3.diadia.ambienti.Direzioni.nord-est", e.getMessage());
+		}
 	}
 	
 	@Test

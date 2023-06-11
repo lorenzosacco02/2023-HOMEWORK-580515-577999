@@ -1,4 +1,5 @@
 package it.uniroma3.diadia.comandi;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,7 +8,7 @@ import it.uniroma3.diadia.*;
 public class ComandoAiuto extends AbstractComando{
 
 	private Set<String> elencoComandi;
-
+	static final public String[] ELENCO_COMANDI = {"vai", "aiuto", "fine","prendi", "posa", "info", "saluta", "interagisci", "regala"};
 
 	public ComandoAiuto(){
 		this.elencoComandi=new HashSet<String>();
@@ -69,7 +70,7 @@ public class ComandoAiuto extends AbstractComando{
 	}
 	
 	public Set<String> getElencoComandi() {
-		return elencoComandi;
+		this.elencoComandi.addAll(Arrays.asList(ELENCO_COMANDI));
+		return this.elencoComandi;
 	}
-
 }
