@@ -20,16 +20,8 @@ public class DiaDia {
 		gioco.gioca();
 	}
 	
-	static final private String MESSAGGIO_BENVENUTO = ""
-			+ "Ti trovi nell'Universita', ma oggi e' diversa dal solito...\n"
-			+ "Meglio andare al piu' presto in biblioteca a studiare. Ma dov'e'?\n"
-			+ "I locali sono popolati da strani personaggi, " + "alcuni amici, altri... chissa!\n"
-			+ "Ci sono attrezzi che potrebbero servirti nell'impresa:\n"
-			+ "puoi raccoglierli, usarli, posarli quando ti sembrano inutili... ma fai attenzione al peso!\n"
-			+ "puoi anche regalarli se pensi che possano ingraziarti qualcuno\n"
-			+ "Ti trovi nell'atrio e la tua borsa è vuota, puoi andare nella direzione che vuoi\n"
-			+ "in fondo alla stanza vedi una lanterna il suo peso è 3kg.\n\n"
-			+ "Per conoscere le istruzioni usa il comando 'aiuto'.";
+	static final private String MESSAGGIO_BENVENUTO = Configuratore.getMessaggioDiBenvenuto();
+			
 
 	private Partita partita;
 	private IOConsole console;
